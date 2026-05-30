@@ -1,23 +1,9 @@
 # Zebrash
 
-> ## ⚠️ Warning
-> As I am leaving Ingrid, I am stepping back from being the maintainer of this project.
-> This repository will remain public, but I will no longer be reviewing pull requests,
-> responding to issues, or releasing updates.
+**Zebrash** is a library to convert **ZPL** (Zebra Programming Language) into: **PNG**, **PDF**, or **SVG**
 
-> It is possible that this project will get a new maintainer from Ingrid in the future.
-> In the meantime, you are welcome to open PRs or issues, though please note
-> that they are unlikely to be reviewed. You are also free to fork this project, as it is
-> released under the MIT license.
-
-> Sincerely, Fedir Kryvytskyi
-
-Library for rendering ZPL (Zebra Programming Language) files as raster images
-
-- Partially based on https://github.com/BinaryKits/BinaryKits.Zpl
-- Uses slightly modified implementations of:
-	- PDF417, Aztec, Code 2 of 5 and EAN13 barcodes from https://github.com/boombuler/barcode/
-	- Code 128, Code 39, QR Code and DataMatrix from https://github.com/makiuchi-d/gozxing
+## New maintainer
+> This is a fork of the [ingridhq/zebrash](https://github.com/ingridhq/zebrash) library
 
 ## Description
 
@@ -28,41 +14,44 @@ Example of the output (more examples can be found inside `testdata` folder):
 
 ![UPS label](testdata/ups_grayscale.png)
 
+## Self-hosted, free, and private
+
+Zebrash runs entirely inside your own application or infrastructure — there is no API to call and nothing to sign up for.
+
+- **It's free.** No per-call quotas, no API keys, no subscription tiers. The library is MIT-licensed and free for commercial use.
+- **Your data never leaves your machine.** Shipping labels carry real customer names, addresses, and tracking numbers. Because parsing and rendering happen locally, none of that is ever transmitted to a third party.
+- **No external dependencies at runtime.** Zebrash works fully offline, with no outbound network calls, meaning no dependencies on third-party services
 
 ## Usage:
 
 ```go
+exampleZPL := "^XA^FO50,50^FDHello World^FS^XZ"
 
-	file, err := os.ReadFile("./testdata/label.zpl")
-	if err != nil {
-		t.Fatal(err)
-	}
+drawer := zebrash.NewDrawer()
 
-	parser := zebrash.NewParser()
+var buff bytes.Buffer
+err = drawer.DrawLabelAsPng(exampleZPL, &buff, drawers.DrawerOptions{
+	LabelWidthMm:         101.6,
+	LabelHeightMm:        203.2,
+	Dpmm:                 8,
+	EnableInvertedLabels: true,
+	GrayscaleOutput:      true
+})
+if err != nil {
+	t.Fatal(err)
+}
 
-	res, err := parser.Parse(file)
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	var buff bytes.Buffer
-
-	drawer := zebrash.NewDrawer()
-
-	err = drawer.DrawLabelAsPng(res[0], &buff, drawers.DrawerOptions{
-		LabelWidthMm:         101.6,
-		LabelHeightMm:        203.2,
-		Dpmm:                 8,
-		EnableInvertedLabels: true,
-		GrayscaleOutput:      true
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	err = os.WriteFile("./testdata/label.png", buff.Bytes(), 0744)
-	if err != nil {
-		t.Fatal(err)
-	}
-
+err = os.WriteFile("./testdata/label.png", buff.Bytes(), 0744)
+if err != nil {
+	t.Fatal(err)
+}
 ```
+
+## Contributing
+
+Contributions are welcome! Please submit an issue or pull request.
+For larger changes, please open an issue first to discuss the approach.
+
+## License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
