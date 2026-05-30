@@ -5,15 +5,6 @@
 ## New maintainer
 > This is a fork of the [ingridhq/zebrash](https://github.com/ingridhq/zebrash) library
 
-## Description
-
-This library emulates subset of ZPL engine and allows you to view most of the ZPL labels that are used by carriers such as Fedex, UPS or DHL as PNGs without the need to possess physical Zebra-compatible printer.
-Think of https://labelary.com/viewer.html except it is completely free for commercial use, has no API limits and can easily be self-hosted or plugged into existing Go application so you don't need to send labels with real customers information to some 3rd-party servers
-
-Example of the output (more examples can be found inside `testdata` folder):
-
-![UPS label](testdata/ups_grayscale.png)
-
 ## Self-hosted, free, and private
 
 Zebrash runs entirely inside your own application or infrastructure — there is no API to call and nothing to sign up for.
@@ -21,6 +12,14 @@ Zebrash runs entirely inside your own application or infrastructure — there is
 - **It's free.** No per-call quotas, no API keys, no subscription tiers. The library is MIT-licensed and free for commercial use.
 - **Your data never leaves your machine.** Shipping labels carry real customer names, addresses, and tracking numbers. Because parsing and rendering happen locally, none of that is ever transmitted to a third party.
 - **No external dependencies at runtime.** Zebrash works fully offline, with no outbound network calls, meaning no dependencies on third-party services
+
+## Examples
+
+A few sample renders (more examples can be found inside the `testdata` folder):
+
+| UPS | FedEx | DHL Paket | Amazon | Posten |
+| :---: | :---: | :---: | :---: | :---: |
+| ![UPS label](testdata/ups_grayscale.png) | ![FedEx label](testdata/fedex.png) | ![DHL Paket label](testdata/dhlpaket.png) | ![Amazon label](testdata/amazon.png) | ![Posten label](testdata/posten.png) |
 
 ## Usage:
 
