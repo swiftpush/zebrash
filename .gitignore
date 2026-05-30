@@ -23,6 +23,9 @@ go.work
 # Testdata diff files
 testdata/diff/*
 
+# PDFs produced by the pdfraster test harness
+testdata/pdf/*
+
 # Visual Studio and Visual Studio Code files
 .vs/
 .vscode/

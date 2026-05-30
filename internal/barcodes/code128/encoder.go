@@ -157,6 +157,27 @@ const (
 )
 
 func EncodeNoMode(content string, height, barWidth int) (image.Image, string, error) {
+	patternsIdx, humanReadable := buildPatternsIdxNoMode(content)
+	img, err := encode(patternsIdx, height, barWidth)
+	if err != nil {
+		return nil, "", err
+	}
+	return img, humanReadable, nil
+}
+
+// EncodePatternNoMode is the vector-friendly counterpart of EncodeNoMode.
+// It returns the bar/space pattern (true = ink, false = space) at one bool per
+// module width, plus the human-readable interpretation of the input.
+func EncodePatternNoMode(content string) ([]bool, string, error) {
+	patternsIdx, humanReadable := buildPatternsIdxNoMode(content)
+	pattern, err := EncodePattern(patternsIdx)
+	if err != nil {
+		return nil, "", err
+	}
+	return pattern, humanReadable, nil
+}
+
+func buildPatternsIdxNoMode(content string) ([]byte, string) {
 	var humanReadable strings.Builder
 
 	var patternsIdx []byte
@@ -294,15 +315,27 @@ func EncodeNoMode(content string, height, barWidth int) (image.Image, string, er
 		i++
 	}
 
-	img, err := encode(patternsIdx, height, barWidth)
-	if err != nil {
-		return nil, "", err
-	}
-
-	return img, humanReadable.String(), nil
+	return patternsIdx, humanReadable.String()
 }
 
 func EncodeAuto(content string, height, barWidth int) (image.Image, error) {
+	patternsIdx, err := buildPatternsIdxAuto(content)
+	if err != nil {
+		return nil, err
+	}
+	return encode(patternsIdx, height, barWidth)
+}
+
+// EncodePatternAuto is the vector-friendly counterpart of EncodeAuto.
+func EncodePatternAuto(content string) ([]bool, error) {
+	patternsIdx, err := buildPatternsIdxAuto(content)
+	if err != nil {
+		return nil, err
+	}
+	return EncodePattern(patternsIdx)
+}
+
+func buildPatternsIdxAuto(content string) ([]byte, error) {
 	contents := []rune(content)
 	length := len(contents)
 	// Check length
@@ -424,10 +457,21 @@ func EncodeAuto(content string, height, barWidth int) (image.Image, error) {
 		patternsIdx = append(patternsIdx, byte(patternIndex))
 	}
 
-	return encode(patternsIdx, height, barWidth)
+	return patternsIdx, nil
 }
 
 func encode(patternsIdx []byte, height, barWidth int) (image.Image, error) {
+	pattern, err := EncodePattern(patternsIdx)
+	if err != nil {
+		return nil, err
+	}
+	return newCode128(pattern, height, barWidth), nil
+}
+
+// EncodePattern computes the bar/space module pattern for an already-resolved
+// sequence of code-128 pattern indices. Each true entry represents one printed
+// module width (the same module width newCode128 multiplies up to barWidth dots).
+func EncodePattern(patternsIdx []byte) ([]bool, error) {
 	if len(patternsIdx) == 0 {
 		return nil, fmt.Errorf("no data to encode")
 	}
@@ -448,7 +492,7 @@ func encode(patternsIdx []byte, height, barWidth int) (image.Image, error) {
 	// Append stop code
 	result = appendPattern(result, CODE_PATTERNS[STOP])
 
-	return newCode128(result, height, barWidth), nil
+	return result, nil
 }
 
 func code128FindCType(value []rune, start int) code128CType {
