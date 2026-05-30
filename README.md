@@ -8,7 +8,7 @@
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
   </p>
   <p align="center">
-    <img src="testdata/ups_grayscale.png" alt="Example UPS label rendered by Zebrash" width="280">
+    <img src="hero.svg" alt="Hero image" width="560">
   </p>
 </p>
 

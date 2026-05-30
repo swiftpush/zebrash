@@ -1,0 +1,111 @@
+<svg viewBox="0 0 980 420" xmlns="http://www.w3.org/2000/svg" font-family="'Nunito', ui-rounded, system-ui, sans-serif">
+  <style>
+    :root{ --ink:#1f2328; --muted:#656d76; --line:#d8dee4; --surface:#f6f8fa; --accent:#6366f1; }
+    @media (prefers-color-scheme: dark){
+      :root{ --ink:#e6edf3; --muted:#8b949e; --line:#30363d; --surface:#1b2027; --accent:#818cf8; }
+    }
+    .ink{fill:var(--ink)} .muted{fill:var(--muted)} .acc{fill:var(--accent)}
+    .code{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:14px}
+    .fmt{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:13px; font-weight:700; letter-spacing:0.5px}
+    .cap{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace; font-size:13px}
+  </style>
+  <defs>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#1f2937" flood-opacity="0.14"/>
+    </filter>
+    <marker id="aPng" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="2" refY="7" orient="auto"><path d="M0 0 L12 7 L0 14 Z" fill="#3B82F6"/></marker>
+    <marker id="aSvg" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="2" refY="7" orient="auto"><path d="M0 0 L12 7 L0 14 Z" fill="#18B26A"/></marker>
+    <marker id="aPdf" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="2" refY="7" orient="auto"><path d="M0 0 L12 7 L0 14 Z" fill="#F2585B"/></marker>
+  </defs>
+
+  <g filter="url(#soft)">
+    <path d="M75 110 H240 L270 140 V305 Q270 310 265 310 H75 Q70 310 70 305 V115 Q70 110 75 110 Z" fill="var(--surface)" stroke="var(--line)" stroke-width="1.6"/>
+    <path d="M240 110 V140 H270 Z" fill="var(--accent)"/>
+  </g>
+  <rect x="88" y="128" width="56" height="24" rx="6" fill="var(--accent)"/>
+  <text x="116" y="144" text-anchor="middle" class="fmt" fill="#FFFFFF">ZPL</text>
+  <g class="code">
+    <text x="90" y="190"><tspan class="acc">^XA</tspan></text>
+    <text x="90" y="216"><tspan class="acc">^FO</tspan><tspan class="muted">50,50</tspan></text>
+    <text x="90" y="242"><tspan class="acc">^FD</tspan><tspan class="ink">HELLO</tspan><tspan class="acc">^FS</tspan></text>
+    <text x="90" y="268"><tspan class="acc">^BCN</tspan><tspan class="muted">,80,Y</tspan></text>
+    <text x="90" y="294"><tspan class="acc">^XZ</tspan></text>
+  </g>
+  <text x="170.0" y="340" text-anchor="middle" class="cap muted">example.zpl</text>
+
+  <path d="M272 150 C 500 150, 540 82, 752 82" fill="none" stroke="#3B82F6" stroke-width="4" stroke-linecap="round" marker-end="url(#aPng)"/>
+  <path d="M272 210 L 752 210" fill="none" stroke="#18B26A" stroke-width="4" stroke-linecap="round" marker-end="url(#aSvg)"/>
+  <path d="M272 270 C 500 270, 540 338, 752 338" fill="none" stroke="#F2585B" stroke-width="4" stroke-linecap="round" marker-end="url(#aPdf)"/>
+
+  <g filter="url(#soft)">
+    <path d="M775 26 H908 L930 48 V133 Q930 138 925 138 H775 Q770 138 770 133 V31 Q770 26 775 26 Z" fill="#FFFFFF" stroke="var(--line)" stroke-width="1.6"/>
+    <path d="M908 26 V48 H930 Z" fill="#3B82F6"/>
+  </g>
+  <rect x="782" y="72" width="136" height="52" rx="6" fill="#F1F4F9"/>
+  <g>
+      <rect x="794" y="80" width="3" height="20" rx="1" fill="#1F2937"/>
+      <rect x="800" y="80" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="805" y="80" width="4" height="20" rx="1" fill="#1F2937"/>
+      <rect x="812" y="80" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="817" y="80" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="822" y="80" width="5" height="20" rx="1" fill="#1F2937"/>
+      <rect x="830" y="80" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="835" y="80" width="3" height="20" rx="1" fill="#1F2937"/>
+      <rect x="841" y="80" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="846" y="80" width="4" height="20" rx="1" fill="#1F2937"/>
+      <rect x="853" y="80" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="858" y="80" width="3" height="20" rx="1" fill="#1F2937"/>
+  </g>
+  <rect x="794" y="106" width="74" height="4.5" rx="2.25" fill="#C7D0DC"/>
+  <rect x="794" y="114" width="52" height="4.5" rx="2.25" fill="#C7D0DC"/>
+  <rect x="782" y="38" width="60" height="24" rx="6" fill="#3B82F6"/>
+  <text x="812.0" y="55.0" text-anchor="middle" class="fmt" fill="#FFFFFF">PNG</text>
+
+  <g filter="url(#soft)">
+    <path d="M775 154 H908 L930 176 V261 Q930 266 925 266 H775 Q770 266 770 261 V159 Q770 154 775 154 Z" fill="#FFFFFF" stroke="var(--line)" stroke-width="1.6"/>
+    <path d="M908 154 V176 H930 Z" fill="#18B26A"/>
+  </g>
+  <rect x="782" y="200" width="136" height="52" rx="6" fill="#F1F4F9"/>
+  <g>
+      <rect x="794" y="208" width="3" height="20" rx="1" fill="#1F2937"/>
+      <rect x="800" y="208" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="805" y="208" width="4" height="20" rx="1" fill="#1F2937"/>
+      <rect x="812" y="208" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="817" y="208" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="822" y="208" width="5" height="20" rx="1" fill="#1F2937"/>
+      <rect x="830" y="208" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="835" y="208" width="3" height="20" rx="1" fill="#1F2937"/>
+      <rect x="841" y="208" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="846" y="208" width="4" height="20" rx="1" fill="#1F2937"/>
+      <rect x="853" y="208" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="858" y="208" width="3" height="20" rx="1" fill="#1F2937"/>
+  </g>
+  <rect x="794" y="234" width="74" height="4.5" rx="2.25" fill="#C7D0DC"/>
+  <rect x="794" y="242" width="52" height="4.5" rx="2.25" fill="#C7D0DC"/>
+  <rect x="782" y="166" width="60" height="24" rx="6" fill="#18B26A"/>
+  <text x="812.0" y="183.0" text-anchor="middle" class="fmt" fill="#FFFFFF">SVG</text>
+
+  <g filter="url(#soft)">
+    <path d="M775 282 H908 L930 304 V389 Q930 394 925 394 H775 Q770 394 770 389 V287 Q770 282 775 282 Z" fill="#FFFFFF" stroke="var(--line)" stroke-width="1.6"/>
+    <path d="M908 282 V304 H930 Z" fill="#F2585B"/>
+  </g>
+  <rect x="782" y="328" width="136" height="52" rx="6" fill="#F1F4F9"/>
+  <g>
+      <rect x="794" y="336" width="3" height="20" rx="1" fill="#1F2937"/>
+      <rect x="800" y="336" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="805" y="336" width="4" height="20" rx="1" fill="#1F2937"/>
+      <rect x="812" y="336" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="817" y="336" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="822" y="336" width="5" height="20" rx="1" fill="#1F2937"/>
+      <rect x="830" y="336" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="835" y="336" width="3" height="20" rx="1" fill="#1F2937"/>
+      <rect x="841" y="336" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="846" y="336" width="4" height="20" rx="1" fill="#1F2937"/>
+      <rect x="853" y="336" width="2" height="20" rx="1" fill="#1F2937"/>
+      <rect x="858" y="336" width="3" height="20" rx="1" fill="#1F2937"/>
+  </g>
+  <rect x="794" y="362" width="74" height="4.5" rx="2.25" fill="#C7D0DC"/>
+  <rect x="794" y="370" width="52" height="4.5" rx="2.25" fill="#C7D0DC"/>
+  <rect x="782" y="294" width="60" height="24" rx="6" fill="#F2585B"/>
+  <text x="812.0" y="311.0" text-anchor="middle" class="fmt" fill="#FFFFFF">PDF</text>
+</svg>
