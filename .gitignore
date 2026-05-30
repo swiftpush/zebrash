@@ -26,6 +26,9 @@ testdata/diff/*
 # PDFs produced by the pdfraster test harness
 testdata/pdf/*
 
+# SVGs produced by the svgraster test harness
+testdata/svg/*
+
 # Visual Studio and Visual Studio Code files
 .vs/
 .vscode/

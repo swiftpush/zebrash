@@ -13,7 +13,14 @@ import (
 	elements_internal "github.com/ingridhq/zebrash/internal/elements"
 	"github.com/ingridhq/zebrash/internal/images"
 	pdfdrawers_internal "github.com/ingridhq/zebrash/internal/pdfdrawers"
+	svgdrawers_internal "github.com/ingridhq/zebrash/internal/svgdrawers"
+	"github.com/ingridhq/zebrash/internal/svgwriter"
 )
+
+// reversePrintFilterID is the filter id emitted by DrawLabelAsSvg into the
+// document's <defs> and referenced by per-element <g filter="url(#...)">
+// wrappers. See docs/svg-backend.md for the XOR-via-feComposite notes.
+const reversePrintFilterID = "zpl-reverse"
 
 type reversePrintable interface {
 	IsReversePrint() bool
@@ -22,6 +29,7 @@ type reversePrintable interface {
 type Drawer struct {
 	elementDrawers    []*drawers_internal.ElementDrawer
 	pdfElementDrawers []*pdfdrawers_internal.ElementDrawer
+	svgElementDrawers []*svgdrawers_internal.ElementDrawer
 }
 
 func NewDrawer() *Drawer {
@@ -57,6 +65,22 @@ func NewDrawer() *Drawer {
 			pdfdrawers_internal.NewBarcodeAztecDrawer(),
 			pdfdrawers_internal.NewBarcodeDatamatrixDrawer(),
 			pdfdrawers_internal.NewBarcodeQrDrawer(),
+		},
+		svgElementDrawers: []*svgdrawers_internal.ElementDrawer{
+			svgdrawers_internal.NewGraphicBoxDrawer(),
+			svgdrawers_internal.NewGraphicCircleDrawer(),
+			svgdrawers_internal.NewGraphicFieldDrawer(),
+			svgdrawers_internal.NewGraphicDiagonalLineDrawer(),
+			svgdrawers_internal.NewTextFieldDrawer(),
+			svgdrawers_internal.NewMaxicodeDrawer(),
+			svgdrawers_internal.NewBarcode128Drawer(),
+			svgdrawers_internal.NewBarcodeEan13Drawer(),
+			svgdrawers_internal.NewBarcode2of5Drawer(),
+			svgdrawers_internal.NewBarcode39Drawer(),
+			svgdrawers_internal.NewBarcodePdf417Drawer(),
+			svgdrawers_internal.NewBarcodeAztecDrawer(),
+			svgdrawers_internal.NewBarcodeDatamatrixDrawer(),
+			svgdrawers_internal.NewBarcodeQrDrawer(),
 		},
 	}
 }
@@ -239,6 +263,110 @@ func (d *Drawer) DrawLabelAsPdf(label elements.LabelInfo, output io.Writer, opti
 
 	if err := pdf.Output(output); err != nil {
 		return fmt.Errorf("failed to write pdf: %w", err)
+	}
+	return nil
+}
+
+// DrawLabelAsSvg renders a parsed ZPL label as a single SVG document.
+//
+// Coordinate system mirrors the PDF backend: the SVG's viewBox is sized in
+// millimeters, dot coordinates are converted via state.DotsToMm, and text
+// is positioned at the baseline.
+//
+// Reverse-print (^FR / ^LR) is emitted via an XOR feComposite filter wrapping
+// the reverse-print element's <g>. Whether the filter round-trips correctly
+// through a given rasterizer/viewer depends on the consumer; the
+// documentation in docs/svg-backend.md and docs/svg-reverse-print.md (if/when
+// added) tracks this. The reverse-print branch falls back to Normal black
+// ink for non-text elements, matching the PDF backend's pragmatic behaviour.
+//
+// DrawerOptions.GrayscaleOutput is ignored on the SVG path (vector SVGs have
+// no grayscale/monochrome distinction).
+func (d *Drawer) DrawLabelAsSvg(label elements.LabelInfo, output io.Writer, options drawers.DrawerOptions) error {
+	options = options.WithDefaults()
+
+	widthMm := options.LabelWidthMm
+	heightMm := options.LabelHeightMm
+	dpmm := options.Dpmm
+
+	labelWidth := int(math.Ceil(widthMm * float64(dpmm)))
+	imageWidth := labelWidth
+	if label.PrintWidth > 0 {
+		imageWidth = min(labelWidth, label.PrintWidth)
+	}
+
+	dotsToMm := 1.0 / float64(dpmm)
+
+	doc := svgwriter.New(output, widthMm, heightMm)
+	doc.Defs(func(d *svgwriter.Doc) {
+		svgdrawers_internal.RegisterBuiltInFonts(d)
+		// feComposite operator="xor" is the spec-defined XOR. Some
+		// rasterizers don't implement it fully; we ship it as-is and
+		// document the caveat. The filter operates on alpha so all
+		// reverse-print elements must draw in white ink (handled by
+		// state.InverseInk + helpers.inkColor).
+		d.Filter(reversePrintFilterID,
+			`<feComposite in="SourceGraphic" in2="BackgroundImage" operator="xor"/>`)
+	})
+	doc.Background(widthMm, heightMm)
+
+	state := &svgdrawers_internal.DrawerState{
+		DotsToMm: dotsToMm,
+	}
+
+	invertLabel := options.EnableInvertedLabels && label.Inverted
+	xOffsetMm := float64(labelWidth-imageWidth) * dotsToMm / 2.0
+
+	openedPageGroups := 0
+	if invertLabel {
+		// translate(width height) scale(-1 -1) rotates 180° about the
+		// label centre — same effect as the PDF backend's TransformScale.
+		doc.GroupTransform(fmt.Sprintf("translate(%g %g) scale(-1 -1)", widthMm, heightMm))
+		openedPageGroups++
+	}
+	if xOffsetMm != 0 {
+		doc.GroupTransform(fmt.Sprintf("translate(%g 0)", xOffsetMm))
+		openedPageGroups++
+	}
+
+	for _, element := range label.Elements {
+		reverse := false
+		if el, ok := element.(reversePrintable); ok {
+			reverse = el.IsReversePrint()
+		}
+
+		// Mirror the PDF backend's pragmatic choice: only TextField
+		// actually engages the reverse-print filter, since path-fill
+		// reverse-print over a white backdrop renders correctly with
+		// Normal black ink anyway (see drawer.go's PDF branch).
+		applyFilter := reverse
+		if _, isText := element.(*elements_internal.TextField); !isText {
+			applyFilter = false
+		}
+
+		if applyFilter {
+			doc.GroupFilter(reversePrintFilterID)
+			state.InverseInk = true
+		}
+
+		for _, drawer := range d.svgElementDrawers {
+			if err := drawer.Draw(doc, element, options, state); err != nil {
+				return fmt.Errorf("failed to draw zpl element to svg: %w", err)
+			}
+		}
+
+		if applyFilter {
+			state.InverseInk = false
+			doc.EndGroup()
+		}
+	}
+
+	for i := 0; i < openedPageGroups; i++ {
+		doc.EndGroup()
+	}
+
+	if err := doc.Close(); err != nil {
+		return fmt.Errorf("failed to write svg: %w", err)
 	}
 	return nil
 }
