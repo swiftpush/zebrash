@@ -118,6 +118,10 @@ err = drawer.DrawLabelAsSvg(labels[0], out, drawers.DrawerOptions{
 ```
 </details>
 
+## 📋 ZPL Command Support
+
+A full breakdown of which ZPL commands Zebrash supports, which are planned, and which are out of scope (hardware-only) is maintained in [`docs/zpl-command-support.md`](docs/zpl-command-support.md).
+
 ## 🤝 Contributing
 
 Contributions are welcome! Please submit an issue or pull request.
