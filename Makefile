@@ -2,7 +2,7 @@
 
 # Run Go tests in Docker ARM64 container
 test-arm64:
-	docker run --rm --platform linux/arm64 -v $(PWD):/app -w /app golang:1.25 go test ./...
+	docker run --rm --platform linux/arm64 -v $(PWD):/app -w /app golang:1.26 go test ./...
 
 # Run the PDF-rasterization tests locally. Needs MuPDF available at runtime;
 # go-fitz dlopen's libmupdf — install it via the system package manager
@@ -14,5 +14,5 @@ test-pdfraster:
 # Run the PDF tests under the same Docker arm64 image used for test-arm64,
 # with libmupdf installed in the image.
 test-arm64-pdfraster:
-	docker run --rm --platform linux/arm64 -v $(PWD):/app -w /app golang:1.25 \
+	docker run --rm --platform linux/arm64 -v $(PWD):/app -w /app golang:1.26 \
 		bash -c "apt-get update && apt-get install -y --no-install-recommends libmupdf-dev mupdf && go test -tags pdfraster ./..."
