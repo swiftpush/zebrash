@@ -9,6 +9,7 @@ import (
 	"github.com/ingridhq/zebrash/drawers"
 	"github.com/ingridhq/zebrash/internal/assets"
 	"github.com/ingridhq/zebrash/internal/elements"
+	"github.com/ingridhq/zebrash/internal/textlayout"
 )
 
 var (
@@ -26,7 +27,7 @@ func NewTextFieldDrawer() *ElementDrawer {
 				return nil
 			}
 
-			text = adjustTextField(text)
+			text = textlayout.AdjustTextField(text)
 
 			fontSize := text.Font.GetSize()
 			scaleX := text.Font.GetScaleX()
@@ -38,10 +39,11 @@ func NewTextFieldDrawer() *ElementDrawer {
 			w, h := gCtx.MeasureString(text.Text)
 			w *= scaleX
 
-			x, y := getTextTopLeftPos(text, w, h, state)
-			state.UpdateAutomaticTextPosition(text, w)
+			x, y := state.TextPosition(text)
+			x, y = textlayout.TopLeftPos(text, w, h, x, y)
+			state.Advance(text, w)
 
-			ax, ay := getTextAxAy(text)
+			ax, ay := textlayout.AxAy(text)
 
 			if rotate := text.Font.Orientation.GetDegrees(); rotate != 0 {
 				gCtx.RotateAbout(gg.Radians(rotate), x, y)
@@ -65,19 +67,6 @@ func NewTextFieldDrawer() *ElementDrawer {
 	}
 }
 
-func adjustTextField(text *elements.TextField) *elements.TextField {
-	fontName := text.Font.Name
-	res := *text
-
-	switch fontName {
-	case "B":
-		// Bold font, text in all uppercase
-		res.Text = strings.ToUpper(res.Text)
-	}
-
-	return &res
-}
-
 func getTffFont(font elements.FontInfo) *truetype.Font {
 	if font.CustomFont != nil {
 		return font.CustomFont
@@ -93,56 +82,6 @@ func getTffFont(font elements.FontInfo) *truetype.Font {
 	default:
 		return font1
 	}
-}
-
-func getTextTopLeftPos(text *elements.TextField, w, h float64, state *DrawerState) (float64, float64) {
-	x, y := state.GetTextPosition(text)
-
-	lines := 1.0
-	spacing := 0.0
-
-	if text.Block != nil {
-		lines = float64(max(text.Block.MaxLines, 1))
-		spacing = float64(text.Block.LineSpacing)
-		w = float64(text.Block.MaxWidth)
-	}
-
-	if !text.Position.CalculateFromBottom {
-		switch text.Font.Orientation {
-		case elements.FieldOrientation90:
-			return x + h/4, y
-		case elements.FieldOrientation180:
-			return x + w, y + h/4
-		case elements.FieldOrientation270:
-			return x + 3*h/4, y + w
-		default:
-			return x, y + 3*h/4
-		}
-	}
-
-	offset := (lines - 1) * (h + spacing)
-
-	switch text.Font.Orientation {
-	case elements.FieldOrientation90:
-		return x + offset, y
-	case elements.FieldOrientation180:
-		return x, y + offset
-	case elements.FieldOrientation270:
-		return x - offset, y
-	default:
-		return x, y - offset
-	}
-}
-
-func getTextAxAy(text *elements.TextField) (float64, float64) {
-	ax := 0.0
-	ay := 0.0
-
-	if text.Alignment == elements.FieldAlignmentRight {
-		ax = 1
-	}
-
-	return ax, ay
 }
 
 func mustLoadFont(fontData []byte) *truetype.Font {

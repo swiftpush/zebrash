@@ -1,12 +1,10 @@
 package pdfdrawers
 
 import (
-	"strings"
-	"unicode"
-
 	"github.com/go-pdf/fpdf"
 	"github.com/ingridhq/zebrash/drawers"
 	"github.com/ingridhq/zebrash/internal/elements"
+	"github.com/ingridhq/zebrash/internal/textlayout"
 )
 
 func NewTextFieldDrawer() *ElementDrawer {
@@ -17,7 +15,7 @@ func NewTextFieldDrawer() *ElementDrawer {
 				return nil
 			}
 
-			text = adjustTextField(text)
+			text = textlayout.AdjustTextField(text)
 
 			fontSizeDots := text.Font.GetSize()
 			scaleX := text.Font.GetScaleX()
@@ -35,10 +33,11 @@ func NewTextFieldDrawer() *ElementDrawer {
 			w := wMm / state.DotsToMm
 			h := fontSizeDots
 
-			x, y := getTextTopLeftPos(text, w, h, state)
-			state.UpdateAutomaticTextPosition(text, w)
+			x, y := state.TextPosition(text)
+			x, y = textlayout.TopLeftPos(text, w, h, x, y)
+			state.Advance(text, w)
 
-			ax, ay := getTextAxAy(text)
+			ax, ay := textlayout.AxAy(text)
 
 			if text.Block != nil {
 				drawWrappedText(pdf, state, text, x, y-h, ax, ay, scaleX)
@@ -96,7 +95,7 @@ func drawWrappedText(pdf *fpdf.Fpdf, state *DrawerState, text *elements.TextFiel
 	maxWidthDots := float64(block.MaxWidth) / scaleX
 	lineSpacingExtra := float64(block.LineSpacing)
 
-	lines := wrapWords(pdf, text.Text, state.Dots(maxWidthDots))
+	lines := textlayout.WrapWords(text.Text, state.Dots(maxWidthDots), pdf.GetStringWidth)
 	if len(lines) == 0 {
 		return
 	}
@@ -154,116 +153,4 @@ func drawWrappedText(pdf *fpdf.Fpdf, state *DrawerState, text *elements.TextFiel
 		pdf.Text(lineX, cursorY, line)
 		cursorY += lineSpacingMm
 	}
-}
-
-// wrapWords mirrors gg.Context.WordWrap: split each paragraph into alternating
-// non-space / space runs, greedily pack words into lines under maxWidthMm,
-// and preserve the original internal whitespace inside each line. The naive
-// strings.Fields + " " join collapses runs of whitespace to a single space,
-// which makes the PDF GetStringWidth diverge from the raster MeasureString
-// for any input that contains "double space" or tab runs (e.g. the centered
-// "USPS TRACKING #  eVS" header on the USPS fixture).
-func wrapWords(pdf *fpdf.Fpdf, s string, maxWidthMm float64) []string {
-	var lines []string
-	for _, paragraph := range strings.Split(s, "\n") {
-		fields := splitOnSpace(paragraph)
-		if len(fields) == 0 {
-			lines = append(lines, "")
-			continue
-		}
-		// Pad to even length so each iteration consumes a (word, gap) pair —
-		// the last word may legitimately have no trailing gap.
-		if len(fields)%2 == 1 {
-			fields = append(fields, "")
-		}
-
-		current := ""
-		for i := 0; i < len(fields); i += 2 {
-			candidate := current + fields[i]
-			if current != "" && pdf.GetStringWidth(candidate) > maxWidthMm {
-				lines = append(lines, strings.TrimSpace(current))
-				current = ""
-				candidate = fields[i]
-			}
-			current = candidate + fields[i+1]
-		}
-		if current != "" {
-			lines = append(lines, strings.TrimSpace(current))
-		}
-	}
-	return lines
-}
-
-// splitOnSpace mirrors gg's wrap.go: alternating runs of non-space / space
-// runes, preserving the original whitespace so a wrapped line can be measured
-// at its natural width (multiple spaces and all).
-func splitOnSpace(x string) []string {
-	if x == "" {
-		return nil
-	}
-	var result []string
-	pi := 0
-	ps := false
-	for i, c := range x {
-		s := unicode.IsSpace(c)
-		if s != ps && i > 0 {
-			result = append(result, x[pi:i])
-			pi = i
-		}
-		ps = s
-	}
-	result = append(result, x[pi:])
-	return result
-}
-
-func adjustTextField(text *elements.TextField) *elements.TextField {
-	res := *text
-	if text.Font.Name == "B" {
-		res.Text = strings.ToUpper(res.Text)
-	}
-	return &res
-}
-
-func getTextTopLeftPos(text *elements.TextField, w, h float64, state *DrawerState) (float64, float64) {
-	x, y := state.GetTextPosition(text)
-
-	lines := 1.0
-	spacing := 0.0
-	if text.Block != nil {
-		lines = float64(max(text.Block.MaxLines, 1))
-		spacing = float64(text.Block.LineSpacing)
-		w = float64(text.Block.MaxWidth)
-	}
-
-	if !text.Position.CalculateFromBottom {
-		switch text.Font.Orientation {
-		case elements.FieldOrientation90:
-			return x + h/4, y
-		case elements.FieldOrientation180:
-			return x + w, y + h/4
-		case elements.FieldOrientation270:
-			return x + 3*h/4, y + w
-		default:
-			return x, y + 3*h/4
-		}
-	}
-
-	offset := (lines - 1) * (h + spacing)
-	switch text.Font.Orientation {
-	case elements.FieldOrientation90:
-		return x + offset, y
-	case elements.FieldOrientation180:
-		return x, y + offset
-	case elements.FieldOrientation270:
-		return x - offset, y
-	default:
-		return x, y - offset
-	}
-}
-
-func getTextAxAy(text *elements.TextField) (float64, float64) {
-	if text.Alignment == elements.FieldAlignmentRight {
-		return 1, 0
-	}
-	return 0, 0
 }

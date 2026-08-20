@@ -1,12 +1,10 @@
 package svgdrawers
 
 import (
-	"strings"
-	"unicode"
-
 	"github.com/ingridhq/zebrash/drawers"
 	"github.com/ingridhq/zebrash/internal/elements"
 	"github.com/ingridhq/zebrash/internal/svgwriter"
+	"github.com/ingridhq/zebrash/internal/textlayout"
 )
 
 // NewTextFieldDrawer ports internal/pdfdrawers/text_field.go to SVG.
@@ -27,7 +25,7 @@ func NewTextFieldDrawer() *ElementDrawer {
 				return nil
 			}
 
-			text = adjustTextField(text)
+			text = textlayout.AdjustTextField(text)
 
 			fontSizeDots := text.Font.GetSize()
 			scaleX := text.Font.GetScaleX()
@@ -42,10 +40,11 @@ func NewTextFieldDrawer() *ElementDrawer {
 			w := wDots
 			h := fontSizeDots
 
-			x, y := getTextTopLeftPos(text, w, h, state)
-			state.UpdateAutomaticTextPosition(text, w)
+			x, y := state.TextPosition(text)
+			x, y = textlayout.TopLeftPos(text, w, h, x, y)
+			state.Advance(text, w)
 
-			ax, _ := getTextAxAy(text)
+			ax, _ := textlayout.AxAy(text)
 
 			if text.Block != nil {
 				drawWrappedText(doc, state, text, family, weight, fontMm, fontPt, fill, x, y-h, ax, scaleX)
@@ -95,7 +94,7 @@ func drawWrappedText(doc *svgwriter.Doc, state *DrawerState, text *elements.Text
 	fontSizeDots := text.Font.GetSize()
 	measure := measureFn(text.Font, fontSizeDots, state.DotsToMm)
 
-	lines := wrapWords(text.Text, state.Dots(maxWidthDots), measure)
+	lines := textlayout.WrapWords(text.Text, state.Dots(maxWidthDots), measure)
 	if len(lines) == 0 {
 		return
 	}
@@ -148,115 +147,4 @@ func drawWrappedText(doc *svgwriter.Doc, state *DrawerState, text *elements.Text
 	for i := 0; i < groups; i++ {
 		doc.EndGroup()
 	}
-}
-
-// wrapWords is a port of pdfdrawers.wrapWords that uses a caller-supplied
-// measure function instead of pdf.GetStringWidth. The measure function must
-// return the rendered width of a string in millimetres.
-//
-// Algorithm: split each paragraph into alternating (word, gap) pairs via
-// splitOnSpace, greedily pack words into lines, preserve internal whitespace.
-func wrapWords(s string, maxWidthMm float64, measure func(string) float64) []string {
-	var lines []string
-	for _, paragraph := range strings.Split(s, "\n") {
-		fields := splitOnSpace(paragraph)
-		if len(fields) == 0 {
-			lines = append(lines, "")
-			continue
-		}
-		// Pad to even length so each iteration consumes a (word, gap) pair.
-		if len(fields)%2 == 1 {
-			fields = append(fields, "")
-		}
-
-		current := ""
-		for i := 0; i < len(fields); i += 2 {
-			candidate := current + fields[i]
-			if current != "" && measure(candidate) > maxWidthMm {
-				lines = append(lines, strings.TrimSpace(current))
-				current = ""
-				candidate = fields[i]
-			}
-			current = candidate + fields[i+1]
-		}
-		if current != "" {
-			lines = append(lines, strings.TrimSpace(current))
-		}
-	}
-	return lines
-}
-
-// splitOnSpace mirrors pdfdrawers.splitOnSpace / gg's wrap.go: alternating
-// runs of non-space / space runes, preserving original whitespace.
-func splitOnSpace(x string) []string {
-	if x == "" {
-		return nil
-	}
-	var result []string
-	pi := 0
-	ps := false
-	for i, c := range x {
-		s := unicode.IsSpace(c)
-		if s != ps && i > 0 {
-			result = append(result, x[pi:i])
-			pi = i
-		}
-		ps = s
-	}
-	result = append(result, x[pi:])
-	return result
-}
-
-func adjustTextField(text *elements.TextField) *elements.TextField {
-	res := *text
-	if text.Font.Name == "B" {
-		res.Text = strings.ToUpper(res.Text)
-	}
-	return &res
-}
-
-// getTextTopLeftPos is a verbatim port of pdfdrawers.getTextTopLeftPos —
-// same offsets, same orientation handling. Returns a baseline-aligned y.
-func getTextTopLeftPos(text *elements.TextField, w, h float64, state *DrawerState) (float64, float64) {
-	x, y := state.GetTextPosition(text)
-
-	lines := 1.0
-	spacing := 0.0
-	if text.Block != nil {
-		lines = float64(max(text.Block.MaxLines, 1))
-		spacing = float64(text.Block.LineSpacing)
-		w = float64(text.Block.MaxWidth)
-	}
-
-	if !text.Position.CalculateFromBottom {
-		switch text.Font.Orientation {
-		case elements.FieldOrientation90:
-			return x + h/4, y
-		case elements.FieldOrientation180:
-			return x + w, y + h/4
-		case elements.FieldOrientation270:
-			return x + 3*h/4, y + w
-		default:
-			return x, y + 3*h/4
-		}
-	}
-
-	offset := (lines - 1) * (h + spacing)
-	switch text.Font.Orientation {
-	case elements.FieldOrientation90:
-		return x + offset, y
-	case elements.FieldOrientation180:
-		return x, y + offset
-	case elements.FieldOrientation270:
-		return x - offset, y
-	default:
-		return x, y - offset
-	}
-}
-
-func getTextAxAy(text *elements.TextField) (float64, float64) {
-	if text.Alignment == elements.FieldAlignmentRight {
-		return 1, 0
-	}
-	return 0, 0
 }
