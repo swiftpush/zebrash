@@ -170,7 +170,7 @@ func modifyBarcodeContentUccMode(content string) string {
 func addZerosPrefix(in string) string {
 	prefixLen := 19 - len(in)
 	var b strings.Builder
-	for i := 0; i < prefixLen; i++ {
+	for range prefixLen {
 		b.WriteRune('0')
 	}
 	b.WriteString(in)
@@ -179,7 +179,7 @@ func addZerosPrefix(in string) string {
 
 func calculateUccBarcodeChecksumDigit(content string) int {
 	checksum := 0
-	for i := 0; i < 19; i++ {
+	for i := range 19 {
 		checksum += int(content[i]-48) * (i%2*2 + 7)
 	}
 	return checksum % 10

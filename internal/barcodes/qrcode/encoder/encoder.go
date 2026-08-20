@@ -251,7 +251,7 @@ func chooseMaskPattern(bits *utils.BitArray, ecLevel ErrorCorrectionLevel, versi
 	minPenalty := math.MaxInt32 // Lower penalty is better.
 	bestMaskPattern := -1
 	// We try all mask patterns to choose the best one.
-	for maskPattern := 0; maskPattern < QRCode_NUM_MASK_PATERNS; maskPattern++ {
+	for maskPattern := range QRCode_NUM_MASK_PATERNS {
 		e := MatrixUtil_buildMatrix(bits, ecLevel, version, maskPattern, matrix)
 		if e != nil {
 			return -1, e
@@ -310,7 +310,7 @@ func terminateBits(numDataBytes int, bits *utils.BitArray) error {
 	}
 	// If we have more space, we'll fill the space with padding patterns defined in 8.4.9 (p.24).
 	numPaddingBytes := numDataBytes - bits.GetSizeInBytes()
-	for i := 0; i < numPaddingBytes; i++ {
+	for i := range numPaddingBytes {
 		v := 0x11
 		if (i & 0x1) == 0 {
 			v = 0xEC
@@ -388,7 +388,7 @@ func interleaveWithECBytes(bits *utils.BitArray, numTotalBytes, numDataBytes, nu
 	// Since, we know the number of reedsolmon blocks, we can initialize the vector with the number.
 	blocks := make([]*BlockPair, 0)
 
-	for i := 0; i < numRSBlocks; i++ {
+	for i := range numRSBlocks {
 		numDataBytesInBlock, numEcBytesInBlock, e := getNumDataBytesAndNumECBytesForBlockID(
 			numTotalBytes, numDataBytes, numRSBlocks, i)
 		if e != nil {

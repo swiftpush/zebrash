@@ -27,7 +27,7 @@ func drawBitMatrix(pdf *fpdf.Fpdf, state *DrawerState, m *utils.BitMatrix, xDots
 	dpmX := float64(dotsPerModuleX)
 	dpmY := float64(dotsPerModuleY)
 
-	for y := 0; y < height; y++ {
+	for y := range height {
 		x := 0
 		for x < width {
 			if !m.Get(x, y) {

@@ -140,7 +140,7 @@ func getPadding(dataCount int, ecCount int, columns int) []int {
 	if mod > 0 {
 		padCount := columns - mod
 		padding = make([]int, padCount)
-		for i := 0; i < padCount; i++ {
+		for i := range padCount {
 			padding[i] = padding_codeword
 		}
 	}

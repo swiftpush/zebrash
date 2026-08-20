@@ -147,7 +147,7 @@ func (b *BitMatrix) Flip(x, y int) {
 
 func (b *BitMatrix) FlipAll() {
 	max := len(b.bits)
-	for i := 0; i < max; i++ {
+	for i := range max {
 		b.bits[i] = ^b.bits[i]
 	}
 }
@@ -169,7 +169,7 @@ func (b *BitMatrix) Xor(mask *BitMatrix) error {
 
 func (b *BitMatrix) Clear() {
 	max := len(b.bits)
-	for i := 0; i < max; i++ {
+	for i := range max {
 		b.bits[i] = 0
 	}
 }
@@ -219,7 +219,7 @@ func (b *BitMatrix) Rotate180() {
 	for i := 0; i < height/2; i++ {
 		topOffset := i * rowSize
 		bottomOffset := (height-i)*rowSize - 1
-		for j := 0; j < rowSize; j++ {
+		for j := range rowSize {
 			top := topOffset + j
 			bottom := bottomOffset - j
 			b.bits[top], b.bits[bottom] = b.bits[bottom], b.bits[top]
@@ -235,7 +235,7 @@ func (b *BitMatrix) Rotate180() {
 	}
 
 	if shift := uint(b.width % 32); shift != 0 {
-		for i := 0; i < height; i++ {
+		for i := range height {
 			offset := rowSize * i
 			b.bits[offset] = bits.Reverse32(b.bits[offset]) >> uint(32-shift)
 			for j := 1; j < rowSize; j++ {

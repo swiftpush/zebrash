@@ -18,7 +18,7 @@ func NewGaloisField(pp, fieldSize, b int) *GaloisField {
 	result.LogTbl = make([]int, fieldSize)
 
 	x := 1
-	for i := 0; i < fieldSize; i++ {
+	for i := range fieldSize {
 		result.ALogTbl[i] = x
 		x = x * 2
 		if x >= fieldSize {
@@ -26,7 +26,7 @@ func NewGaloisField(pp, fieldSize, b int) *GaloisField {
 		}
 	}
 
-	for i := 0; i < fieldSize; i++ {
+	for i := range fieldSize {
 		result.LogTbl[result.ALogTbl[i]] = int(i)
 	}
 

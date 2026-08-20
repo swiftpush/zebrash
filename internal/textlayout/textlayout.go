@@ -126,7 +126,7 @@ func AdjustTextField(text *elements.TextField) *elements.TextField {
 // raster MeasureString). maxWidth and measure's result must share units.
 func WrapWords(s string, maxWidth float64, measure func(string) float64) []string {
 	var lines []string
-	for _, paragraph := range strings.Split(s, "\n") {
+	for paragraph := range strings.SplitSeq(s, "\n") {
 		fields := splitOnSpace(paragraph)
 		if len(fields) == 0 {
 			lines = append(lines, "")

@@ -304,7 +304,7 @@ func findMinimums(charCounts []float64, intCharCounts []int, min int, mins []byt
 	for i := range mins {
 		mins[i] = 0
 	}
-	for i := 0; i < 6; i++ {
+	for i := range 6 {
 		intCharCounts[i] = int(math.Ceil(charCounts[i]))
 		current := intCharCounts[i]
 		if min > current {
@@ -322,7 +322,7 @@ func findMinimums(charCounts []float64, intCharCounts []int, min int, mins []byt
 
 func getMinimumCount(mins []byte) int {
 	minCount := 0
-	for i := 0; i < 6; i++ {
+	for i := range 6 {
 		minCount += int(mins[i])
 	}
 	return minCount

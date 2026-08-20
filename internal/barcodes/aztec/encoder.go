@@ -38,7 +38,7 @@ func stuffBits(bits *utils.BitList, wordSize int) *utils.BitList {
 	mask := (1 << uint(wordSize)) - 2
 	for i := 0; i < n; i += wordSize {
 		word := 0
-		for j := 0; j < wordSize; j++ {
+		for j := range wordSize {
 			if i+j >= n || bits.GetBit(i+j) {
 				word |= 1 << uint(wordSize-1-j)
 			}
@@ -75,7 +75,7 @@ func generateModeMessage(compact bool, layers, messageSizeInWords int) *utils.Bi
 func drawModeMessage(matrix *aztecCode, compact bool, matrixSize int, modeMessage *utils.BitList) {
 	center := matrixSize / 2
 	if compact {
-		for i := 0; i < 7; i++ {
+		for i := range 7 {
 			offset := center - 3 + i
 			if modeMessage.GetBit(i) {
 				matrix.set(offset, center-5)
@@ -91,7 +91,7 @@ func drawModeMessage(matrix *aztecCode, compact bool, matrixSize int, modeMessag
 			}
 		}
 	} else {
-		for i := 0; i < 10; i++ {
+		for i := range 10 {
 			offset := center - 5 + i + i/5
 			if modeMessage.GetBit(i) {
 				matrix.set(offset, center-7)
@@ -216,14 +216,14 @@ func Encode(data []byte, minECCPercent, userSpecifiedLayers, magnification int) 
 
 	if compact {
 		matrixSize = baseMatrixSize
-		for i := 0; i < len(alignmentMap); i++ {
+		for i := range alignmentMap {
 			alignmentMap[i] = i
 		}
 	} else {
 		matrixSize = baseMatrixSize + 1 + 2*((baseMatrixSize/2-1)/15)
 		origCenter := baseMatrixSize / 2
 		center := matrixSize / 2
-		for i := 0; i < origCenter; i++ {
+		for i := range origCenter {
 			newOffset := i + i/15
 			alignmentMap[origCenter-i-1] = center - newOffset - 1
 			alignmentMap[origCenter+i] = center + newOffset + 1
@@ -243,7 +243,7 @@ func Encode(data []byte, minECCPercent, userSpecifiedLayers, magnification int) 
 
 		for j := 0; j < rowSize; j++ {
 			columnOffset := j * 2
-			for k := 0; k < 2; k++ {
+			for k := range 2 {
 				if messageBits.GetBit(rowOffset + columnOffset + k) {
 					code.set(alignmentMap[i*2+k], alignmentMap[i*2+j])
 				}

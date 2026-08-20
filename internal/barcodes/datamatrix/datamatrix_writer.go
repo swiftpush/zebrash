@@ -42,7 +42,7 @@ func encodeLowLevel(placement *encoder.DefaultPlacement, symbolInfo *encoder.Sym
 
 	matrixY := 0
 
-	for y := 0; y < symbolHeight; y++ {
+	for y := range symbolHeight {
 		// Fill the top edge with alternate 0 / 1
 		var matrixX int
 		if (y % symbolInfo.GetMatrixHeight()) == 0 {
@@ -54,7 +54,7 @@ func encodeLowLevel(placement *encoder.DefaultPlacement, symbolInfo *encoder.Sym
 			matrixY++
 		}
 		matrixX = 0
-		for x := 0; x < symbolWidth; x++ {
+		for x := range symbolWidth {
 			// Fill the right edge with full 1
 			if (x % symbolInfo.GetMatrixWidth()) == 0 {
 				matrix.SetBool(matrixX, matrixY, true)
@@ -87,14 +87,8 @@ func encodeLowLevel(placement *encoder.DefaultPlacement, symbolInfo *encoder.Sym
 func convertByteMatrixToBitMatrix(matrix *encoder.ByteMatrix, reqWidth, reqHeight int) *utils.BitMatrix {
 	matrixWidth := matrix.GetWidth()
 	matrixHeight := matrix.GetHeight()
-	outputWidth := reqWidth
-	if outputWidth < matrixWidth {
-		outputWidth = matrixWidth
-	}
-	outputHeight := reqHeight
-	if outputHeight < matrixHeight {
-		outputHeight = matrixHeight
-	}
+	outputWidth := max(reqWidth, matrixWidth)
+	outputHeight := max(reqHeight, matrixHeight)
 
 	multiple := outputWidth / matrixWidth
 	if mh := outputHeight / matrixHeight; mh < multiple {

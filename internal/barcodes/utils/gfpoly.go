@@ -44,7 +44,7 @@ func (gp *GFPoly) MultByMonominal(degree int, coeff int) *GFPoly {
 	}
 	size := len(gp.Coefficients)
 	result := make([]int, size+degree)
-	for i := 0; i < size; i++ {
+	for i := range size {
 		result[i] = int(gp.gf.Multiply(int(gp.Coefficients[i]), int(coeff)))
 	}
 	return NewGFPoly(gp.gf, result)
@@ -59,9 +59,9 @@ func (gp *GFPoly) Multiply(other *GFPoly) *GFPoly {
 	bCoeff := other.Coefficients
 	bLen := len(bCoeff)
 	product := make([]int, aLen+bLen-1)
-	for i := 0; i < aLen; i++ {
+	for i := range aLen {
 		ac := int(aCoeff[i])
-		for j := 0; j < bLen; j++ {
+		for j := range bLen {
 			bc := int(bCoeff[j])
 			product[i+j] = int(gp.gf.AddOrSub(int(product[i+j]), gp.gf.Multiply(ac, bc)))
 		}

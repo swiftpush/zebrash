@@ -29,14 +29,8 @@ func renderResult(code *encoder.QRCode, width, height int, opts encoder.Options)
 	inputHeight := input.GetHeight()
 	qrWidth := inputWidth + (quietZone * 2)
 	qrHeight := inputHeight + (quietZone * 2)
-	outputWidth := qrWidth
-	if outputWidth < width {
-		outputWidth = width
-	}
-	outputHeight := qrHeight
-	if outputHeight < height {
-		outputHeight = height
-	}
+	outputWidth := max(qrWidth, width)
+	outputHeight := max(qrHeight, height)
 
 	multiple := outputWidth / qrWidth
 	if h := outputHeight / qrHeight; multiple > h {

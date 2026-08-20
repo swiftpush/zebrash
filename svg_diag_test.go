@@ -256,7 +256,7 @@ func deltaStrSvg(png, svg *image.Rectangle) string {
 
 func typeName(el any) string {
 	t := reflect.TypeOf(el)
-	if t.Kind() == reflect.Ptr {
+	if t.Kind() == reflect.Pointer {
 		t = t.Elem()
 	}
 	return t.String()
@@ -264,7 +264,7 @@ func typeName(el any) string {
 
 func zplPos(el any) string {
 	v := reflect.ValueOf(el)
-	if v.Kind() == reflect.Ptr {
+	if v.Kind() == reflect.Pointer {
 		v = v.Elem()
 	}
 	if v.Kind() != reflect.Struct {

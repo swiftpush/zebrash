@@ -209,8 +209,8 @@ func maybeEmbedVersionInfo(version *Version, matrix *ByteMatrix) error {
 	}
 
 	bitIndex := 6*3 - 1 // It will decrease from 17 to 0.
-	for i := 0; i < 6; i++ {
-		for j := 0; j < 3; j++ {
+	for i := range 6 {
+		for j := range 3 {
 			// Place bits in LSB (least significant bit) to MSB order.
 			bit := versionInfoBits.Get(bitIndex)
 			bitIndex--
@@ -239,7 +239,7 @@ func embedDataBits(dataBits *utils.BitArray, maskPattern int, matrix *ByteMatrix
 			x -= 1
 		}
 		for y >= 0 && y < matrix.GetHeight() {
-			for i := 0; i < 2; i++ {
+			for i := range 2 {
 				xx := x - i
 				// Skip the cell if it's not empty.
 				if !isEmpty(matrix.Get(xx, y)) {
@@ -406,7 +406,7 @@ func embedDarkDotAtLeftBottomCorner(matrix *ByteMatrix) error {
 }
 
 func embedHorizontalSeparationPattern(xStart, yStart int, matrix *ByteMatrix) error {
-	for x := 0; x < 8; x++ {
+	for x := range 8 {
 		if !isEmpty(matrix.Get(xStart+x, yStart)) {
 			return fmt.Errorf(
 				"embedHorizontalSeparationPattern(%d, %d)", xStart, yStart)
@@ -417,7 +417,7 @@ func embedHorizontalSeparationPattern(xStart, yStart int, matrix *ByteMatrix) er
 }
 
 func embedVerticalSeparationPattern(xStart, yStart int, matrix *ByteMatrix) error {
-	for y := 0; y < 7; y++ {
+	for y := range 7 {
 		if !isEmpty(matrix.Get(xStart, yStart+y)) {
 			return fmt.Errorf(
 				"embedVerticalSeparationPattern(%d, %d)", xStart, yStart)
@@ -428,18 +428,18 @@ func embedVerticalSeparationPattern(xStart, yStart int, matrix *ByteMatrix) erro
 }
 
 func embedPositionAdjustmentPattern(xStart, yStart int, matrix *ByteMatrix) {
-	for y := 0; y < 5; y++ {
+	for y := range 5 {
 		patternY := matrixUtil_POSITION_ADJUSTMENT_PATTERN[y]
-		for x := 0; x < 5; x++ {
+		for x := range 5 {
 			matrix.Set(xStart+x, yStart+y, patternY[x])
 		}
 	}
 }
 
 func embedPositionDetectionPattern(xStart, yStart int, matrix *ByteMatrix) {
-	for y := 0; y < 7; y++ {
+	for y := range 7 {
 		patternY := matrixUtil_POSITION_DETECTION_PATTERN[y]
-		for x := 0; x < 7; x++ {
+		for x := range 7 {
 			matrix.Set(xStart+x, yStart+y, patternY[x])
 		}
 	}

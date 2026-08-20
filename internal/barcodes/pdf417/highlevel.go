@@ -81,10 +81,7 @@ func encodeNumeric(digits []rune) ([]int, error) {
 
 	for i := 0; i < chunkCount; i++ {
 		start := i * 44
-		end := start + 44
-		if end > digitCount {
-			end = digitCount
-		}
+		end := min(start+44, digitCount)
 		chunk := digits[start:end]
 
 		chunkNum := big.NewInt(0)
@@ -276,11 +273,11 @@ func encodeBinary(data []byte, startmode encodingMode) []int {
 		words := make([]int, 5)
 		for (count - idx) >= 6 {
 			var t int64 = 0
-			for i := 0; i < 6; i++ {
+			for i := range 6 {
 				t = t << 8
 				t += int64(data[idx+i])
 			}
-			for i := 0; i < 5; i++ {
+			for i := range 5 {
 				words[4-i] = int(t % 900)
 				t = t / 900
 			}

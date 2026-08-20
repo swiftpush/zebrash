@@ -61,7 +61,7 @@ func init() {
 	alog = make([]int, 255)
 
 	p := 1
-	for i := 0; i < 255; i++ {
+	for i := range 255 {
 		alog[i] = p
 		log[p] = i
 		p *= 2
@@ -93,11 +93,11 @@ func ErrorCorrection_EncodeECC200(codewords []byte, symbolInfo *SymbolInfo) ([]b
 		sb = sb[:cap(sb)]
 		dataSizes := make([]int, blockCount)
 		errorSizes := make([]int, blockCount)
-		for i := 0; i < blockCount; i++ {
+		for i := range blockCount {
 			dataSizes[i] = symbolInfo.GetDataLengthForInterleavedBlock(i + 1)
 			errorSizes[i] = symbolInfo.GetErrorLengthForInterleavedBlock(i + 1)
 		}
-		for block := 0; block < blockCount; block++ {
+		for block := range blockCount {
 			temp := make([]byte, 0, dataSizes[block])
 			for d := block; d < symbolInfo.GetDataCapacity(); d += blockCount {
 				temp = append(temp, codewords[d])
@@ -115,7 +115,7 @@ func ErrorCorrection_EncodeECC200(codewords []byte, symbolInfo *SymbolInfo) ([]b
 
 func createECCBlock(codewords []byte, numECWords int) ([]byte, error) {
 	table := -1
-	for i := 0; i < len(factorSets); i++ {
+	for i := range factorSets {
 		if factorSets[i] == numECWords {
 			table = i
 			break
@@ -126,7 +126,7 @@ func createECCBlock(codewords []byte, numECWords int) ([]byte, error) {
 	}
 	poly := factors[table]
 	ecc := make([]int, numECWords)
-	for i := 0; i < len(codewords); i++ {
+	for i := range codewords {
 		m := ecc[numECWords-1] ^ int(codewords[i])
 		for k := numECWords - 1; k > 0; k-- {
 			if m != 0 && poly[k] != 0 {
@@ -142,7 +142,7 @@ func createECCBlock(codewords []byte, numECWords int) ([]byte, error) {
 		}
 	}
 	eccReversed := make([]byte, numECWords)
-	for i := 0; i < numECWords; i++ {
+	for i := range numECWords {
 		eccReversed[i] = byte(ecc[numECWords-i-1])
 	}
 	return eccReversed, nil

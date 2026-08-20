@@ -7,9 +7,9 @@ import (
 func bitsToWords(stuffedBits *utils.BitList, wordSize int, wordCount int) []int {
 	message := make([]int, wordCount)
 
-	for i := 0; i < wordCount; i++ {
+	for i := range wordCount {
 		value := 0
-		for j := 0; j < wordSize; j++ {
+		for j := range wordSize {
 			if stuffedBits.GetBit(i*wordSize + j) {
 				value |= (1 << uint(wordSize-j-1))
 			}

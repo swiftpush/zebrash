@@ -346,7 +346,7 @@ func buildPatternsIdxAuto(content string) ([]byte, error) {
 	forcedCodeSet := -1
 
 	// Check content
-	for i := 0; i < length; i++ {
+	for i := range length {
 		c := contents[i]
 		// check for non ascii characters that are not special GS1 characters
 		switch c {
@@ -587,7 +587,7 @@ func code128ChooseCode(value []rune, start, oldCode int) int {
 func appendPattern(target []bool, pattern []int) []bool {
 	color := true
 	for _, len := range pattern {
-		for j := 0; j < len; j++ {
+		for range len {
 			target = append(target, color)
 		}
 		color = !color

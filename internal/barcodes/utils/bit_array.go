@@ -181,7 +181,7 @@ func (b *BitArray) AppendBits(value int, numBits int) error {
 func (b *BitArray) AppendBitArray(other *BitArray) {
 	otherSize := other.size
 	b.ensureCapacity(b.size + otherSize)
-	for i := 0; i < otherSize; i++ {
+	for i := range otherSize {
 		b.AppendBit(other.Get(i))
 	}
 }
@@ -197,9 +197,9 @@ func (b *BitArray) Xor(other *BitArray) error {
 }
 
 func (b *BitArray) ToBytes(bitOffset int, array []byte, offset, numBytes int) {
-	for i := 0; i < numBytes; i++ {
+	for i := range numBytes {
 		theByte := byte(0)
-		for j := 0; j < 8; j++ {
+		for j := range 8 {
 			if b.Get(bitOffset) {
 				theByte |= 1 << uint(7-j)
 			}
@@ -217,7 +217,7 @@ func (b *BitArray) Reverse() {
 	newBits := make([]uint32, len(b.bits))
 	len := (b.size - 1) / 32
 	oldBitsLen := len + 1
-	for i := 0; i < oldBitsLen; i++ {
+	for i := range oldBitsLen {
 		newBits[len-i] = bits.Reverse32(b.bits[i])
 	}
 	if b.size != oldBitsLen*32 {

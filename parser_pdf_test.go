@@ -152,8 +152,8 @@ func compareImagesTolerant(got, want image.Image, fullDiffPath string, pixelDelt
 	const maxReportedSampleMismatches = 5
 	var sampleMismatches []string
 
-	for y := 0; y < height; y++ {
-		for x := 0; x < width; x++ {
+	for y := range height {
+		for x := range width {
 			gv := gotGray.GrayAt(x, y).Y
 			wv := wantGray.GrayAt(x, y).Y
 
@@ -215,22 +215,22 @@ func buildPdfComposite(want, got *image.Gray, diff *image.RGBA, width, height in
 
 	out := image.NewRGBA(image.Rect(0, 0, totalW, totalH))
 	// White background.
-	for y := 0; y < totalH; y++ {
-		for x := 0; x < totalW; x++ {
+	for y := range totalH {
+		for x := range totalW {
 			out.Set(x, y, color.RGBA{R: 255, G: 255, B: 255, A: 255})
 		}
 	}
 	// Black separators.
 	black := color.RGBA{A: 255}
-	for y := 0; y < totalH; y++ {
-		for s := 0; s < sep; s++ {
+	for y := range totalH {
+		for s := range sep {
 			out.Set(width+s, y, black)
 			out.Set(width*2+sep+s, y, black)
 		}
 	}
 
-	for y := 0; y < height; y++ {
-		for x := 0; x < width; x++ {
+	for y := range height {
+		for x := range width {
 			wv := want.GrayAt(x, y).Y
 			out.Set(x, y, color.RGBA{R: wv, G: wv, B: wv, A: 255})
 

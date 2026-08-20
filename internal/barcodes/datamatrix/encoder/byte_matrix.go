@@ -8,7 +8,7 @@ type ByteMatrix struct {
 
 func NewByteMatrix(width, height int) *ByteMatrix {
 	bytes := make([][]int8, height)
-	for i := 0; i < height; i++ {
+	for i := range height {
 		bytes[i] = make([]int8, width)
 	}
 	return &ByteMatrix{bytes, width, height}

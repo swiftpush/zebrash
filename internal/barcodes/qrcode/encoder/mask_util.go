@@ -45,8 +45,8 @@ func MaskUtil_applyMaskPenaltyRule3(matrix *ByteMatrix) int {
 	array := matrix.GetArray()
 	width := matrix.GetWidth()
 	height := matrix.GetHeight()
-	for y := 0; y < height; y++ {
-		for x := 0; x < width; x++ {
+	for y := range height {
+		for x := range width {
 			arrayY := array[y] // We can at least optimize this access
 			if x+6 < width &&
 				arrayY[x] == 1 &&
@@ -113,9 +113,9 @@ func MaskUtil_applyMaskPenaltyRule4(matrix *ByteMatrix) int {
 	array := matrix.GetArray()
 	width := matrix.GetWidth()
 	height := matrix.GetHeight()
-	for y := 0; y < height; y++ {
+	for y := range height {
 		arrayY := array[y]
-		for x := 0; x < width; x++ {
+		for x := range width {
 			if arrayY[x] == 1 {
 				numDarkCells++
 			}
