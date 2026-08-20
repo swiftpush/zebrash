@@ -337,6 +337,11 @@ var drawTestCases = []drawTestCase{
 		dstPath: "templating.png",
 	},
 	{
+		name:    "Templating swap (two recalls in one label)",
+		srcPath: "templating_swap.zpl",
+		dstPath: "templating_swap.png",
+	},
+	{
 		name:    "Graphic symbol",
 		srcPath: "gs.zpl",
 		dstPath: "gs.png",

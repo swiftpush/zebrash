@@ -133,7 +133,7 @@ func (p *Parser) Parse(zplData []byte) ([]elements.LabelInfo, error) {
 					return nil, fmt.Errorf("failed to resolve zpl elements: %w", err)
 				}
 
-				resultElements = append(resultElements, resolvedElements)
+				resultElements = append(resultElements, resolvedElements...)
 				currentRecalledFormat = rf
 				p.printer.LabelInverted = rf.Inverted
 				continue
