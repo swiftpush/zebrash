@@ -143,7 +143,6 @@ func WrapWords(s string, maxWidth float64, measure func(string) float64) []strin
 			candidate := current + fields[i]
 			if current != "" && measure(candidate) > maxWidth {
 				lines = append(lines, strings.TrimSpace(current))
-				current = ""
 				candidate = fields[i]
 			}
 			current = candidate + fields[i+1]

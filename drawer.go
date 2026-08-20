@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-pdf/fpdf"
 	"github.com/ingridhq/gg"
+
 	"github.com/ingridhq/zebrash/drawers"
 	"github.com/ingridhq/zebrash/elements"
 	drawers_internal "github.com/ingridhq/zebrash/internal/drawers"
@@ -278,7 +279,7 @@ func (d *Drawer) DrawLabelAsPdf(label elements.LabelInfo, output io.Writer, opti
 // through a given rasterizer/viewer depends on the consumer; the
 // documentation in docs/svg-backend.md and docs/svg-reverse-print.md (if/when
 // added) tracks this. The reverse-print branch falls back to Normal black
-// ink for non-text elements, matching the PDF backend's pragmatic behaviour.
+// ink for non-text elements, matching the PDF backend's pragmatic behavior.
 //
 // DrawerOptions.GrayscaleOutput is ignored on the SVG path (vector SVGs have
 // no grayscale/monochrome distinction).
@@ -320,7 +321,7 @@ func (d *Drawer) DrawLabelAsSvg(label elements.LabelInfo, output io.Writer, opti
 	openedPageGroups := 0
 	if invertLabel {
 		// translate(width height) scale(-1 -1) rotates 180° about the
-		// label centre — same effect as the PDF backend's TransformScale.
+		// label center — same effect as the PDF backend's TransformScale.
 		doc.GroupTransform(fmt.Sprintf("translate(%g %g) scale(-1 -1)", widthMm, heightMm))
 		openedPageGroups++
 	}

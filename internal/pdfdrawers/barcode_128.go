@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/go-pdf/fpdf"
+
 	"github.com/ingridhq/zebrash/drawers"
 	"github.com/ingridhq/zebrash/internal/barcodes/code128"
 	"github.com/ingridhq/zebrash/internal/elements"

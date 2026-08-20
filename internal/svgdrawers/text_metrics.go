@@ -4,10 +4,11 @@ import (
 	"sync"
 
 	"github.com/golang/freetype/truetype"
-	"github.com/ingridhq/zebrash/internal/assets"
-	"github.com/ingridhq/zebrash/internal/elements"
 	"golang.org/x/image/font"
 	"golang.org/x/image/math/fixed"
+
+	"github.com/ingridhq/zebrash/internal/assets"
+	"github.com/ingridhq/zebrash/internal/elements"
 )
 
 // faceKey identifies a font face by family, weight, and size in dots.
@@ -90,13 +91,13 @@ func MeasureStringDots(fi elements.FontInfo, fontSizeDots float64, s string) flo
 	return float64(total) / 64.0
 }
 
-// MeasureStringMm measures string width in millimetres, given the face size
+// MeasureStringMm measures string width in millimeters, given the face size
 // in dots and the dot-to-mm conversion factor.
 func MeasureStringMm(fi elements.FontInfo, fontSizeDots, dotsToMm float64, s string) float64 {
 	return MeasureStringDots(fi, fontSizeDots, s) * dotsToMm
 }
 
-// measureFn returns a closure that measures a string in millimetres using the
+// measureFn returns a closure that measures a string in millimeters using the
 // font face resolved from fi at fontSizeDots. Convenient for passing to
 // wrapWords / drawStringJustifiedSvg.
 func measureFn(fi elements.FontInfo, fontSizeDots, dotsToMm float64) func(string) float64 {

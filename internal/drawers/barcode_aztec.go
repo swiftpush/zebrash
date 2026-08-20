@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/ingridhq/gg"
+
 	"github.com/ingridhq/zebrash/drawers"
 	"github.com/ingridhq/zebrash/internal/barcodes/aztec"
 	"github.com/ingridhq/zebrash/internal/elements"
@@ -17,8 +18,8 @@ func NewBarcodeAztecDrawer() *ElementDrawer {
 				return nil
 			}
 
-			var layers int = aztec.DEFAULT_LAYERS
-			var minECCPercent int = aztec.DEFAULT_EC_PERCENT
+			var layers = aztec.DEFAULT_LAYERS
+			var minECCPercent = aztec.DEFAULT_EC_PERCENT
 
 			const sizeModeFullRangeOffset = 200
 

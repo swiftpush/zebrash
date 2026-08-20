@@ -36,6 +36,11 @@ linters:
 
   exclusions:
     generated: lax # keep default excludes for common false positives
+    paths:
+      # internal/barcodes/** holds locally-modified copies of upstream barcode
+      # encoders (see CLAUDE.md). We keep them as close to upstream as possible,
+      # so they are not linted — cosmetic churn there only complicates merges.
+      - internal/barcodes
     rules:
       # Test fixtures and golden-image helpers are noisy for these.
       - path: _test\.go

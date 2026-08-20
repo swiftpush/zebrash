@@ -121,7 +121,6 @@ func TestPdfPerElementDiag(t *testing.T) {
 		t.Skip("re-run with -pdf-element-diag to enable per-element bbox diagnostics")
 	}
 
-	const dpi = 203.0
 	outDir := "./testdata/diff/_pdf_elements"
 	if err := os.MkdirAll(outDir, 0755); err != nil {
 		t.Fatalf("mkdir: %v", err)

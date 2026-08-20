@@ -2,6 +2,7 @@ package printers
 
 import (
 	"github.com/golang/freetype/truetype"
+
 	"github.com/ingridhq/zebrash/internal/elements"
 )
 

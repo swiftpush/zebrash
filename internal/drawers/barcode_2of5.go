@@ -5,6 +5,7 @@ import (
 	"regexp"
 
 	"github.com/ingridhq/gg"
+
 	"github.com/ingridhq/zebrash/drawers"
 	"github.com/ingridhq/zebrash/internal/barcodes/twooffive"
 	"github.com/ingridhq/zebrash/internal/elements"

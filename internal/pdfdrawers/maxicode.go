@@ -8,6 +8,7 @@ import (
 
 	"github.com/go-pdf/fpdf"
 	"github.com/ingridhq/maxicode"
+
 	"github.com/ingridhq/zebrash/drawers"
 	"github.com/ingridhq/zebrash/internal/elements"
 )

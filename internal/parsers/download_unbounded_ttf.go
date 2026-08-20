@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/golang/freetype/truetype"
+
 	"github.com/ingridhq/zebrash/internal/hex"
 	"github.com/ingridhq/zebrash/internal/printers"
 )

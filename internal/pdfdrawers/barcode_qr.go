@@ -4,6 +4,7 @@ import (
 	"fmt"
 
 	"github.com/go-pdf/fpdf"
+
 	"github.com/ingridhq/zebrash/drawers"
 	"github.com/ingridhq/zebrash/internal/barcodes/qrcode"
 	"github.com/ingridhq/zebrash/internal/barcodes/qrcode/encoder"

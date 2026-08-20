@@ -20,6 +20,7 @@ import (
 	"image/png"
 
 	resvg "github.com/kanrichan/resvg-go"
+
 	"github.com/ingridhq/zebrash/internal/assets"
 )
 
@@ -35,13 +36,13 @@ func RasterizeSVG(svg []byte, dpi float64) (*image.Gray, error) {
 	if err != nil {
 		return nil, fmt.Errorf("resvg: new context: %w", err)
 	}
-	defer ctx.Close()
+	defer func() { _ = ctx.Close() }()
 
 	r, err := ctx.NewRenderer()
 	if err != nil {
 		return nil, fmt.Errorf("resvg: new renderer: %w", err)
 	}
-	defer r.Close()
+	defer func() { _ = r.Close() }()
 
 	if err := r.SetDpi(float32(dpi)); err != nil {
 		return nil, fmt.Errorf("resvg: set dpi: %w", err)

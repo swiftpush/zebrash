@@ -7,6 +7,7 @@ import (
 	"image/png"
 
 	"github.com/go-pdf/fpdf"
+
 	"github.com/ingridhq/zebrash/drawers"
 	"github.com/ingridhq/zebrash/internal/elements"
 	"github.com/ingridhq/zebrash/internal/images"

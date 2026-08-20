@@ -205,7 +205,7 @@ func decodeZ64(value string) ([]byte, error) {
 		return nil, err
 	}
 
-	defer z.Close()
+	defer func() { _ = z.Close() }()
 
 	return io.ReadAll(z)
 }

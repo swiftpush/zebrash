@@ -12,8 +12,8 @@ import (
 // system font DB / loaded font data — keyed on the TTF's own family — rather
 // than via inline @font-face aliases. Using the real names lets the same
 // SVG render in:
-//   * resvg with our four embedded TTFs registered via LoadFontData;
-//   * a browser, where the inline @font-face <defs> entry kicks in.
+//   - resvg with our four embedded TTFs registered via LoadFontData;
+//   - a browser, where the inline @font-face <defs> entry kicks in.
 //
 // HelveticaBoldCondensedCustom.ttf has a non-standard family value ("My
 // Font" / "Bold" subfamily) — we use it as-is to avoid republishing the

@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/ingridhq/gg"
+
 	"github.com/ingridhq/zebrash/drawers"
 	"github.com/ingridhq/zebrash/internal/barcodes/datamatrix"
 	"github.com/ingridhq/zebrash/internal/barcodes/datamatrix/encoder"

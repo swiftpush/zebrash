@@ -5,6 +5,7 @@ import (
 	"image"
 
 	"github.com/ingridhq/gg"
+
 	"github.com/ingridhq/zebrash/drawers"
 	"github.com/ingridhq/zebrash/internal/barcodes/code39"
 	"github.com/ingridhq/zebrash/internal/elements"

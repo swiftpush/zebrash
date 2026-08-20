@@ -2,6 +2,7 @@ package pdfdrawers
 
 import (
 	"github.com/go-pdf/fpdf"
+
 	"github.com/ingridhq/zebrash/internal/assets"
 	"github.com/ingridhq/zebrash/internal/elements"
 )
