@@ -1,0 +1,53 @@
+version: "2"
+
+# Linter setup for github.com/ingridhq/zebrash.
+#
+# This is a ZPL -> raster/vector rendering library: the code is dominated by
+# coordinate/dot/dpi math and glyph metrics, so "magic number", complexity and
+# whitespace-style linters are intentionally left off (they'd bury the real
+# findings). The enabled set targets correctness (error handling, leaked
+# resources) plus cheap dead-code / redundancy checks.
+
+linters:
+  default: standard # errcheck, govet, ineffassign, staticcheck, unused
+  enable:
+    - bodyclose # unclosed response/reader bodies
+    - copyloopvar # redundant loop-var copies (go1.22+ semantics)
+    - errorlint # correct error wrapping / errors.Is/As usage
+    - gocritic # opinionated diagnostics (defaults only)
+    - makezero # append to a non-zero-length make() slice
+    - misspell # typos in comments and strings
+    - nilerr # returning nil when a non-nil error is in scope
+    - predeclared # shadowing predeclared identifiers (len, error, ...)
+    - revive # golint successor, general style
+    - unconvert # redundant type conversions
+    - usestdlibvars # use stdlib constants (http.MethodGet, ...)
+    - wastedassign # assignments whose value is never used
+
+  settings:
+    misspell:
+      locale: US
+    revive:
+      rules:
+        # Keep revive close to its defaults but silence the noisiest rules for
+        # this codebase.
+        - name: unused-parameter
+          disabled: true # drawer/parser interfaces keep params for uniformity
+
+  exclusions:
+    generated: lax # keep default excludes for common false positives
+    rules:
+      # Test fixtures and golden-image helpers are noisy for these.
+      - path: _test\.go
+        linters:
+          - errcheck
+          - gocritic
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/ingridhq/zebrash

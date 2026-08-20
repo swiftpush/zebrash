@@ -1,4 +1,5 @@
-.PHONY: test-arm64 test-pdfraster test-arm64-pdfraster
+lint:
+	golangci-lint run ./...
 
 # Run Go tests in Docker ARM64 container
 test-arm64:
