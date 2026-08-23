@@ -3,7 +3,7 @@ package printers
 import (
 	"github.com/golang/freetype/truetype"
 
-	"github.com/ingridhq/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/elements"
 )
 
 type VirtualPrinter struct {

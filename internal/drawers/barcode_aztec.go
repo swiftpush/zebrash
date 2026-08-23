@@ -5,9 +5,9 @@ import (
 
 	"github.com/ingridhq/gg"
 
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/internal/barcodes/aztec"
-	"github.com/ingridhq/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/internal/barcodes/aztec"
+	"github.com/swiftpush/zebrash/internal/elements"
 )
 
 func NewBarcodeAztecDrawer() *ElementDrawer {

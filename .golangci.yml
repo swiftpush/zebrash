@@ -1,6 +1,6 @@
 version: "2"
 
-# Linter setup for github.com/ingridhq/zebrash.
+# Linter setup for github.com/swiftpush/zebrash.
 #
 # This is a ZPL -> raster/vector rendering library: the code is dominated by
 # coordinate/dot/dpi math and glyph metrics, so "magic number", complexity and
@@ -55,4 +55,4 @@ formatters:
   settings:
     goimports:
       local-prefixes:
-        - github.com/ingridhq/zebrash
+        - github.com/swiftpush/zebrash

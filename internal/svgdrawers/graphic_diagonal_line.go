@@ -1,9 +1,9 @@
 package svgdrawers
 
 import (
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/internal/elements"
-	"github.com/ingridhq/zebrash/internal/svgwriter"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/svgwriter"
 )
 
 // NewGraphicDiagonalLineDrawer ports internal/pdfdrawers/graphic_diagonal_line.go

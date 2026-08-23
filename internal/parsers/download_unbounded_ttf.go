@@ -7,8 +7,8 @@ import (
 
 	"github.com/golang/freetype/truetype"
 
-	"github.com/ingridhq/zebrash/internal/hex"
-	"github.com/ingridhq/zebrash/internal/printers"
+	"github.com/swiftpush/zebrash/internal/hex"
+	"github.com/swiftpush/zebrash/internal/printers"
 )
 
 func NewDownloadUnboundedTtfParser() *CommandParser {

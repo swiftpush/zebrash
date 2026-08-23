@@ -15,8 +15,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/elements"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/elements"
 )
 
 // PDF-test diagnostics layered on top of TestDrawLabelAsPdf:

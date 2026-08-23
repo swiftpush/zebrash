@@ -3,8 +3,8 @@ package parsers
 import (
 	"fmt"
 
-	"github.com/ingridhq/zebrash/internal/hex"
-	"github.com/ingridhq/zebrash/internal/printers"
+	"github.com/swiftpush/zebrash/internal/hex"
+	"github.com/swiftpush/zebrash/internal/printers"
 )
 
 func NewFieldDataParser() *CommandParser {

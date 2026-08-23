@@ -8,14 +8,14 @@ import (
 	"github.com/go-pdf/fpdf"
 	"github.com/ingridhq/gg"
 
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/elements"
-	drawers_internal "github.com/ingridhq/zebrash/internal/drawers"
-	elements_internal "github.com/ingridhq/zebrash/internal/elements"
-	"github.com/ingridhq/zebrash/internal/images"
-	pdfdrawers_internal "github.com/ingridhq/zebrash/internal/pdfdrawers"
-	svgdrawers_internal "github.com/ingridhq/zebrash/internal/svgdrawers"
-	"github.com/ingridhq/zebrash/internal/svgwriter"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/elements"
+	drawers_internal "github.com/swiftpush/zebrash/internal/drawers"
+	elements_internal "github.com/swiftpush/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/images"
+	pdfdrawers_internal "github.com/swiftpush/zebrash/internal/pdfdrawers"
+	svgdrawers_internal "github.com/swiftpush/zebrash/internal/svgdrawers"
+	"github.com/swiftpush/zebrash/internal/svgwriter"
 )
 
 // reversePrintFilterID is the filter id emitted by DrawLabelAsSvg into the

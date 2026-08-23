@@ -7,8 +7,8 @@ import (
 	"golang.org/x/image/font"
 	"golang.org/x/image/math/fixed"
 
-	"github.com/ingridhq/zebrash/internal/assets"
-	"github.com/ingridhq/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/assets"
+	"github.com/swiftpush/zebrash/internal/elements"
 )
 
 // faceKey identifies a font face by family, weight, and size in dots.

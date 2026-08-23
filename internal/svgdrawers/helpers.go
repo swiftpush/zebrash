@@ -3,7 +3,7 @@ package svgdrawers
 import (
 	"fmt"
 
-	"github.com/ingridhq/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/elements"
 )
 
 // inkColor returns the CSS color string ("black" / "white") for a ZPL

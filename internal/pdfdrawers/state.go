@@ -1,6 +1,6 @@
 package pdfdrawers
 
-import "github.com/ingridhq/zebrash/internal/textlayout"
+import "github.com/swiftpush/zebrash/internal/textlayout"
 
 type DrawerState struct {
 	// AutoPosition tracks the ^FT running pen position (Advance / TextPosition).

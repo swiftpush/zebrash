@@ -21,7 +21,7 @@ import (
 
 	resvg "github.com/kanrichan/resvg-go"
 
-	"github.com/ingridhq/zebrash/internal/assets"
+	"github.com/swiftpush/zebrash/internal/assets"
 )
 
 // RasterizeSVG renders svg at dpi and returns a grayscale image. The PNG

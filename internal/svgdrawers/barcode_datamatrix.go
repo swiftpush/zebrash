@@ -4,11 +4,11 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/internal/barcodes/datamatrix"
-	"github.com/ingridhq/zebrash/internal/barcodes/datamatrix/encoder"
-	"github.com/ingridhq/zebrash/internal/elements"
-	"github.com/ingridhq/zebrash/internal/svgwriter"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/internal/barcodes/datamatrix"
+	"github.com/swiftpush/zebrash/internal/barcodes/datamatrix/encoder"
+	"github.com/swiftpush/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/svgwriter"
 )
 
 // NewBarcodeDatamatrixDrawer ports internal/pdfdrawers/barcode_datamatrix.go

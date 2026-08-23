@@ -6,8 +6,8 @@ import (
 
 	"github.com/golang/freetype/truetype"
 
-	"github.com/ingridhq/zebrash/internal/elements"
-	"github.com/ingridhq/zebrash/internal/printers"
+	"github.com/swiftpush/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/printers"
 )
 
 func NewChangeFontParser() *CommandParser {

@@ -7,7 +7,7 @@ import (
 	"math/bits"
 	"strings"
 
-	"github.com/ingridhq/zebrash/internal/images"
+	"github.com/swiftpush/zebrash/internal/images"
 )
 
 type BitMatrix struct {

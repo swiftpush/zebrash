@@ -6,9 +6,9 @@ import (
 
 	"github.com/ingridhq/gg"
 
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/internal/barcodes/code39"
-	"github.com/ingridhq/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/internal/barcodes/code39"
+	"github.com/swiftpush/zebrash/internal/elements"
 )
 
 func NewBarcode39Drawer() *ElementDrawer {

@@ -3,8 +3,8 @@ package pdfdrawers
 import (
 	"github.com/go-pdf/fpdf"
 
-	"github.com/ingridhq/zebrash/internal/barcodes/utils"
-	"github.com/ingridhq/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/barcodes/utils"
+	"github.com/swiftpush/zebrash/internal/elements"
 )
 
 // drawBitMatrix renders the dark modules of a BitMatrix as filled rects in PDF

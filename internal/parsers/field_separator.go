@@ -1,8 +1,8 @@
 package parsers
 
 import (
-	"github.com/ingridhq/zebrash/internal/elements"
-	"github.com/ingridhq/zebrash/internal/printers"
+	"github.com/swiftpush/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/printers"
 )
 
 func NewFieldSeparatorParser() *CommandParser {

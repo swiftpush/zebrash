@@ -1,6 +1,6 @@
 package svgdrawers
 
-import "github.com/ingridhq/zebrash/internal/textlayout"
+import "github.com/swiftpush/zebrash/internal/textlayout"
 
 // DrawerState mirrors pdfdrawers.DrawerState — same auto-position bookkeeping
 // (embedded from textlayout), same dot→mm conversion factor, same

@@ -1,7 +1,7 @@
 package aztec
 
 import (
-	"github.com/ingridhq/zebrash/internal/barcodes/utils"
+	"github.com/swiftpush/zebrash/internal/barcodes/utils"
 )
 
 func highlevelEncode(data []byte) *utils.BitList {

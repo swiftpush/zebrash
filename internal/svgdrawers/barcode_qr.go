@@ -3,11 +3,11 @@ package svgdrawers
 import (
 	"fmt"
 
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/internal/barcodes/qrcode"
-	"github.com/ingridhq/zebrash/internal/barcodes/qrcode/encoder"
-	"github.com/ingridhq/zebrash/internal/elements"
-	"github.com/ingridhq/zebrash/internal/svgwriter"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/internal/barcodes/qrcode"
+	"github.com/swiftpush/zebrash/internal/barcodes/qrcode/encoder"
+	"github.com/swiftpush/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/svgwriter"
 )
 
 // NewBarcodeQrDrawer ports internal/pdfdrawers/barcode_qr.go to SVG —

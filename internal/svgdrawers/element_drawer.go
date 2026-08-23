@@ -10,8 +10,8 @@
 package svgdrawers
 
 import (
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/internal/svgwriter"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/internal/svgwriter"
 )
 
 // ElementDrawer mirrors the PNG / PDF ElementDrawer shape: a single typed

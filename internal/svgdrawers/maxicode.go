@@ -8,9 +8,9 @@ import (
 
 	"github.com/ingridhq/maxicode"
 
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/internal/elements"
-	"github.com/ingridhq/zebrash/internal/svgwriter"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/svgwriter"
 )
 
 // NewMaxicodeDrawer ports internal/pdfdrawers/maxicode.go to SVG. Maxicode

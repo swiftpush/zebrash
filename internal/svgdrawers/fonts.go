@@ -1,9 +1,9 @@
 package svgdrawers
 
 import (
-	"github.com/ingridhq/zebrash/internal/assets"
-	"github.com/ingridhq/zebrash/internal/elements"
-	"github.com/ingridhq/zebrash/internal/svgwriter"
+	"github.com/swiftpush/zebrash/internal/assets"
+	"github.com/swiftpush/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/svgwriter"
 )
 
 // The SVG <text> font-family values match the real TTF family names rather

@@ -4,8 +4,8 @@ import (
 	"image"
 	"image/color"
 
-	"github.com/ingridhq/zebrash/internal/barcodes/utils"
-	"github.com/ingridhq/zebrash/internal/images"
+	"github.com/swiftpush/zebrash/internal/barcodes/utils"
+	"github.com/swiftpush/zebrash/internal/images"
 )
 
 type pdfBarcode struct {

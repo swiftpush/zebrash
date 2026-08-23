@@ -1,7 +1,7 @@
 package parsers
 
 import (
-	"github.com/ingridhq/zebrash/internal/printers"
+	"github.com/swiftpush/zebrash/internal/printers"
 )
 
 func NewPrintOrientationParser() *CommandParser {

@@ -12,13 +12,13 @@ import (
 
 	"github.com/go-pdf/fpdf"
 
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/internal/barcodes/aztec"
-	"github.com/ingridhq/zebrash/internal/barcodes/code39"
-	"github.com/ingridhq/zebrash/internal/barcodes/ean13"
-	"github.com/ingridhq/zebrash/internal/barcodes/pdf417"
-	"github.com/ingridhq/zebrash/internal/barcodes/twooffive"
-	"github.com/ingridhq/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/internal/barcodes/aztec"
+	"github.com/swiftpush/zebrash/internal/barcodes/code39"
+	"github.com/swiftpush/zebrash/internal/barcodes/ean13"
+	"github.com/swiftpush/zebrash/internal/barcodes/pdf417"
+	"github.com/swiftpush/zebrash/internal/barcodes/twooffive"
+	"github.com/swiftpush/zebrash/internal/elements"
 )
 
 // embedBarcodeImage drops a rasterized barcode into the PDF as an embedded PNG.

@@ -14,7 +14,7 @@ import (
 
 	"github.com/gen2brain/go-fitz"
 
-	"github.com/ingridhq/zebrash/drawers"
+	"github.com/swiftpush/zebrash/drawers"
 )
 
 // TestDrawLabelAsPdf renders every fixture in drawTestCases through the PDF

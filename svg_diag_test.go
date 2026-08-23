@@ -15,9 +15,9 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/elements"
-	"github.com/ingridhq/zebrash/internal/svgraster"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/elements"
+	"github.com/swiftpush/zebrash/internal/svgraster"
 )
 
 // SVG-test diagnostics layered on top of TestDrawLabelAsSvg. Mirrors the PDF

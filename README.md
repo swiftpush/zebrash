@@ -2,9 +2,9 @@
   <h1 align="center">Zebrash</h1>
   <p align="center">Render <strong>ZPL</strong> (Zebra Programming Language) labels to <strong>PNG</strong>, <strong>PDF</strong> &amp; <strong>SVG</strong> — no printer, no cloud, no cost.</p>
   <p align="center">
-    <a href="https://pkg.go.dev/github.com/ingridhq/zebrash"><img src="https://pkg.go.dev/badge/github.com/ingridhq/zebrash.svg" alt="Go Reference"></a>
-    <a href="https://goreportcard.com/report/github.com/ingridhq/zebrash"><img src="https://goreportcard.com/badge/github.com/ingridhq/zebrash" alt="Go Report Card"></a>
-    <img src="https://img.shields.io/github/go-mod/go-version/ingridhq/zebrash" alt="Go version">
+    <a href="https://pkg.go.dev/github.com/swiftpush/zebrash"><img src="https://pkg.go.dev/badge/github.com/swiftpush/zebrash.svg" alt="Go Reference"></a>
+    <a href="https://goreportcard.com/report/github.com/swiftpush/zebrash"><img src="https://goreportcard.com/badge/github.com/swiftpush/zebrash" alt="Go Report Card"></a>
+    <img src="https://img.shields.io/github/go-mod/go-version/swiftpush/zebrash" alt="Go version">
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT"></a>
   </p>
   <p align="center">
@@ -43,7 +43,7 @@ A few sample renders (more examples can be found inside the `testdata` folder):
 ## 📦 Install
 
 ```bash
-go get github.com/ingridhq/zebrash
+go get github.com/swiftpush/zebrash
 ```
 
 ## 🚀 Usage
@@ -57,8 +57,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/ingridhq/zebrash"
-	"github.com/ingridhq/zebrash/drawers"
+	"github.com/swiftpush/zebrash"
+	"github.com/swiftpush/zebrash/drawers"
 )
 
 func main() {

@@ -1,6 +1,6 @@
 package pdfdrawers
 
-import "github.com/ingridhq/zebrash/internal/elements"
+import "github.com/swiftpush/zebrash/internal/elements"
 
 // adjustPositionFromBottom mirrors adjustImageTypeSetPosition in
 // internal/drawers/element_drawer.go, but operates on dot dimensions instead of

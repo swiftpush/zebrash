@@ -6,7 +6,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/ingridhq/zebrash/internal/barcodes/utils"
+	"github.com/swiftpush/zebrash/internal/barcodes/utils"
 )
 
 type encodedNumber struct {

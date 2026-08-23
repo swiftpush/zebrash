@@ -6,10 +6,10 @@ import (
 	"image"
 	"image/png"
 
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/internal/elements"
-	"github.com/ingridhq/zebrash/internal/images"
-	"github.com/ingridhq/zebrash/internal/svgwriter"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/images"
+	"github.com/swiftpush/zebrash/internal/svgwriter"
 )
 
 // NewGraphicFieldDrawer ports internal/pdfdrawers/graphic_field.go to SVG.

@@ -11,8 +11,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/internal/svgraster"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/internal/svgraster"
 )
 
 // TestDrawLabelAsSvg renders every fixture in drawTestCases through the SVG

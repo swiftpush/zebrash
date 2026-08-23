@@ -12,7 +12,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/ingridhq/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/elements"
 )
 
 // AutoPosition tracks the running pen position for automatic-position text

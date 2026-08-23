@@ -1,10 +1,10 @@
 package svgdrawers
 
 import (
-	"github.com/ingridhq/zebrash/drawers"
-	"github.com/ingridhq/zebrash/internal/elements"
-	"github.com/ingridhq/zebrash/internal/svgwriter"
-	"github.com/ingridhq/zebrash/internal/textlayout"
+	"github.com/swiftpush/zebrash/drawers"
+	"github.com/swiftpush/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/svgwriter"
+	"github.com/swiftpush/zebrash/internal/textlayout"
 )
 
 // NewTextFieldDrawer ports internal/pdfdrawers/text_field.go to SVG.

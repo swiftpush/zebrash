@@ -3,7 +3,7 @@ package pdfdrawers
 import (
 	"github.com/go-pdf/fpdf"
 
-	"github.com/ingridhq/zebrash/drawers"
+	"github.com/swiftpush/zebrash/drawers"
 )
 
 type ElementDrawer struct {

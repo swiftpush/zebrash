@@ -1,6 +1,6 @@
 package svgdrawers
 
-import "github.com/ingridhq/zebrash/internal/elements"
+import "github.com/swiftpush/zebrash/internal/elements"
 
 // adjustPositionFromBottom mirrors pdfdrawers.adjustPositionFromBottom and
 // the raster adjustImageTypeSetPosition: when the field anchors at the

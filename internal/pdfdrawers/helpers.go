@@ -3,7 +3,7 @@ package pdfdrawers
 import (
 	"github.com/go-pdf/fpdf"
 
-	"github.com/ingridhq/zebrash/internal/elements"
+	"github.com/swiftpush/zebrash/internal/elements"
 )
 
 // setDrawColor sets fpdf's draw (stroke) color to match a ZPL line color.
