@@ -1,0 +1,82 @@
+THIRD-PARTY NOTICES
+===================
+
+This product bundles locally-modified copies of third-party source code under
+`internal/barcodes/`. The original works and their licenses are reproduced
+below. These notices are retained in accordance with the terms of the MIT
+License under which the original code is distributed.
+
+Note: `github.com/ingridhq/gg` and `github.com/ingridhq/maxicode` are consumed
+as ordinary Go module dependencies (see go.mod) and are not vendored here;
+their licenses travel with those modules.
+
+
+--------------------------------------------------------------------------------
+1. boombuler/barcode
+--------------------------------------------------------------------------------
+
+Source:   https://github.com/boombuler/barcode
+Used in:  internal/barcodes/pdf417/    (PDF417)
+          internal/barcodes/aztec/     (Aztec)
+          internal/barcodes/twooffive/ (Interleaved / Standard 2 of 5)
+          internal/barcodes/ean13/     (EAN-13)
+          portions of internal/barcodes/utils/ (shared encoding helpers)
+
+The MIT License (MIT)
+
+Copyright (c) 2014 Florian Sundermann
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+--------------------------------------------------------------------------------
+2. gozxing
+--------------------------------------------------------------------------------
+
+Source:   https://github.com/makiuchi-d/gozxing
+Used in:  internal/barcodes/code128/    (Code 128)
+          internal/barcodes/code39/     (Code 39)
+          internal/barcodes/qrcode/     (QR Code)
+          internal/barcodes/datamatrix/ (Data Matrix)
+          portions of internal/barcodes/utils/ (shared encoding helpers)
+
+gozxing is a pure-Go port of ZXing (https://github.com/zxing/zxing) and is
+distributed by its author under the MIT License, reproduced below.
+
+MIT License
+
+Copyright (c) 2018 Daisuke MAKIUCHI (MakKi; makki_d)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

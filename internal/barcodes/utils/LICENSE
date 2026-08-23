@@ -1,0 +1,12 @@
+Shared barcode encoding helpers.
+
+The files in this directory are derived from locally-modified copies of two
+upstream projects, both distributed under the MIT License:
+
+  - boombuler/barcode   https://github.com/boombuler/barcode
+                        Copyright (c) 2014 Florian Sundermann
+  - gozxing             https://github.com/makiuchi-d/gozxing
+                        Copyright (c) 2018 Daisuke MAKIUCHI
+
+Full license texts are reproduced in the sibling barcode directories and in
+the repository-root THIRD_PARTY_NOTICES file.
