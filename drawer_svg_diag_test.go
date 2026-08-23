@@ -21,9 +21,9 @@ import (
 )
 
 // SVG-test diagnostics layered on top of TestDrawLabelAsSvg. Mirrors the PDF
-// harness's structure (parser_pdf_test.go / pdf_diag_test.go):
+// harness's structure (drawer_pdf_test.go / drawer_pdf_diag_test.go):
 //
-//   * compareImagesTolerantSvg in parser_svg_test.go writes a 3-up composite
+//   * compareImagesTolerantSvg in drawer_svg_test.go writes a 3-up composite
 //     for each failing case and feeds recordSvgFailure here.
 //
 //   * TestSvgPerElementDiag (gated by -svg-element-diag) re-renders every
@@ -48,7 +48,7 @@ func init() {
 		"Run TestSvgPerElementDiag — re-renders every element in isolation and reports per-element bbox deltas")
 }
 
-// TestMain is defined here (rather than in parser_svg_test.go) so the SVG
+// TestMain is defined here (rather than in drawer_svg_test.go) so the SVG
 // build tag pulls in a single TestMain. The PDF harness has its own TestMain
 // behind the `pdfraster` tag — Go's build constraints keep them from
 // colliding because they're never compiled together.

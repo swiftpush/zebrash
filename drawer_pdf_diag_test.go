@@ -21,7 +21,7 @@ import (
 
 // PDF-test diagnostics layered on top of TestDrawLabelAsPdf:
 //
-//   * 3-up composites are written by compareImagesTolerant in parser_pdf_test.go
+//   * 3-up composites are written by compareImagesTolerant in drawer_pdf_test.go
 //     for each failing case; recordPdfFailure here tracks them so we can emit
 //     a single index page at the end of the run.
 //

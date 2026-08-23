@@ -79,7 +79,7 @@ func TestDrawLabelAsSvg(t *testing.T) {
 	}
 }
 
-// compareImagesTolerantSvg is the parser_pdf_test.go's compareImagesTolerant
+// compareImagesTolerantSvg is the drawer_pdf_test.go's compareImagesTolerant
 // with `_svg` naming. Kept as a near-copy to avoid coupling the two harnesses
 // — they're free to diverge as the SVG backend matures.
 func compareImagesTolerantSvg(got, want image.Image, fullDiffPath string, pixelDelta int, mismatchPct float64, t *testing.T) {
@@ -155,7 +155,7 @@ func compareImagesTolerantSvg(got, want image.Image, fullDiffPath string, pixelD
 	recordSvgFailure(svgFailureInfo{name: t.Name(), pct: pct, composite: fullDiffPath})
 }
 
-// buildSvgComposite mirrors parser_pdf_test.go's buildPdfComposite. Layout:
+// buildSvgComposite mirrors drawer_pdf_test.go's buildPdfComposite. Layout:
 // [ want | got | colored diff ], 4-pixel black separators.
 func buildSvgComposite(want, got *image.Gray, diff *image.RGBA, width, height int) *image.RGBA {
 	const sep = 4
