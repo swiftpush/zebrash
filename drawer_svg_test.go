@@ -91,8 +91,8 @@ func compareImagesTolerantSvg(got, want image.Image, fullDiffPath string, pixelD
 		t.Fatalf("Image bounds differ beyond DPI rounding: got=%v want=%v", gotBounds, wantBounds)
 	}
 
-	width := minIntSvg(gotBounds.Dx(), wantBounds.Dx())
-	height := minIntSvg(gotBounds.Dy(), wantBounds.Dy())
+	width := min(gotBounds.Dx(), wantBounds.Dx())
+	height := min(gotBounds.Dy(), wantBounds.Dy())
 
 	gotGray, ok := got.(*image.Gray)
 	if !ok {
@@ -188,11 +188,4 @@ func buildSvgComposite(want, got *image.Gray, diff *image.RGBA, width, height in
 		}
 	}
 	return out
-}
-
-func minIntSvg(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
 }

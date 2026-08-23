@@ -134,8 +134,8 @@ func compareImagesTolerant(got, want image.Image, fullDiffPath string, pixelDelt
 		t.Fatalf("Image bounds differ beyond DPI rounding: got=%v want=%v", gotBounds, wantBounds)
 	}
 
-	width := minInt(gotBounds.Dx(), wantBounds.Dx())
-	height := minInt(gotBounds.Dy(), wantBounds.Dy())
+	width := min(gotBounds.Dx(), wantBounds.Dx())
+	height := min(gotBounds.Dy(), wantBounds.Dy())
 
 	gotGray, ok := got.(*image.Gray)
 	if !ok {
@@ -242,11 +242,4 @@ func buildPdfComposite(want, got *image.Gray, diff *image.RGBA, width, height in
 		}
 	}
 	return out
-}
-
-func minInt(a, b int) int {
-	if a < b {
-		return a
-	}
-	return b
 }
